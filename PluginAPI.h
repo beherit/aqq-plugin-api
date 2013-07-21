@@ -114,7 +114,7 @@
 #define AQQ_SYSTEM_REGEXP L"AQQ/System/RegExp"
 #define AQQ_SYSTEM_FRAMESETTINGS L"AQQ/System/FrameSettings"
 #define AQQ_SYSTEM_COLORCHANGE L"AQQ/System/ColorChange"
-#define AQQ_SYSTEM_COLORGETHUE L"AQQ/System/ColorGetHUE"
+#define AQQ_SYSTEM_COLORGETHUE L"AQQ/System/ColorGetHue"
 #define AQQ_SYSTEM_COLORGETSATURATION L"AQQ/System/ColorGetSaturation"
 
 //Windows
