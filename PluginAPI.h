@@ -2,7 +2,6 @@
 //Przetłumaczone SDK komunikatora AQQ z języka Delphi na bardziej ludzki C++
 //---------------------------------------------------------------------------
 //Środowisko: Embarcadero C++ Builder
-//Wersja z dnia: 16.06.2013
 //Pełen opis: http://adn.beherit.pl
 //Autor: Krzysztof Grochocki (Beherit)
 //WWW: http://beherit.pl
@@ -296,7 +295,7 @@
 #define AQQ_FUNCTION_SHA1 L"AQQ/Function/Sha1"
 #define AQQ_FUNCTION_SAY L"AQQ/Function/Say"
 
-//CONSTANS-------------------------------------------------------------------
+//CONSTANTS-------------------------------------------------------------------
 
 //##001 - Account Events
 #define ACCOUNT_EVENT_DEFAULT 0
@@ -311,6 +310,7 @@
 #define SYS_FUNCTION_TASKBARPEN 3
 #define SYS_FUNCTION_CLOSEBTN 4
 #define SYS_FUNCTION_MSGCOUNTER 5
+#define SYS_FUNCTION_SKINSYSDLG 6
 
 //##003 - Tabs
 #define TAB_JABBER 1
