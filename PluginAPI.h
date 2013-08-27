@@ -294,6 +294,7 @@
 #define AQQ_FUNCTION_QUOTEDSTR L"AQQ/Function/QuotedStr"
 #define AQQ_FUNCTION_SHA1 L"AQQ/Function/Sha1"
 #define AQQ_FUNCTION_SAY L"AQQ/Function/Say"
+#define AQQ_FUNCTION_BASE64 L"AQQ/Function/Base64"
 
 //CONSTANTS-------------------------------------------------------------------
 
