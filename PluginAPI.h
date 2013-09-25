@@ -1274,26 +1274,26 @@ typedef struct TPluginControl
 typedef
  TPluginControl* PPluginControl;
  
-typedef int (__stdcall *TAQQHook)(WPARAM wParam, LPARAM lParam);
+typedef INT_PTR (__stdcall *TAQQHook)(WPARAM wParam, LPARAM lParam);
 typedef TAQQHook* PAQQHook;
 
-typedef int (__stdcall *TAQQService)(WPARAM wParam,LPARAM lParam);
+typedef INT_PTR (__stdcall *TAQQService)(WPARAM wParam,LPARAM lParam);
 typedef TAQQService* PAQQService;
 
 typedef struct TPluginLink
 {
  wchar_t* Path;
  HANDLE (__stdcall *CreateHookableEvent)(wchar_t* Name);
- int (__stdcall *DestroyHookableEvent)(HANDLE hEvent);
- int (__stdcall *NotifyEventHooks)(HANDLE hEvent, WPARAM wParam, LPARAM lParam);
+ INT_PTR (__stdcall *DestroyHookableEvent)(HANDLE hEvent);
+ INT_PTR (__stdcall *NotifyEventHooks)(HANDLE hEvent, WPARAM wParam, LPARAM lParam);
  HANDLE (__stdcall *HookEvent)(wchar_t* Name, TAQQHook HookProc);
  HANDLE (__stdcall *HookEventMessage)(wchar_t* Name, HWND Handle, unsigned int Msg);
  int (__stdcall *UnhookEvent)(HANDLE hHook);
  HANDLE (__stdcall *CreateServiceFunction)(wchar_t* Name, TAQQService ServiceProc);
  void* CreateTransientServiceFunction;
- int (__stdcall *DestroyServiceFunction)(HANDLE hService);
- int (__stdcall *CallService)(wchar_t* Name, WPARAM wParam, LPARAM lParam);
- int (__stdcall *ServiceExists)(wchar_t* Name);
+ INT_PTR (__stdcall *DestroyServiceFunction)(HANDLE hService);
+ INT_PTR (__stdcall *CallService)(wchar_t* Name, WPARAM wParam, LPARAM lParam);
+ INT_PTR (__stdcall *ServiceExists)(wchar_t* Name);
 } TPluginLink;
 typedef
  TPluginLink* PPluginLink;
