@@ -3,10 +3,10 @@
 //---------------------------------------------------------------------------
 //Środowisko: Embarcadero C++ Builder
 //Pełen opis: http://adn.beherit.pl
-//Autor: Krzysztof Grochocki (Beherit)
+//Autor: Krzysztof Grochocki
 //WWW: http://beherit.pl
 //E-mail: kontakt@beherit.pl
-//Jabber: beherit@aqq.eu
+//Jabber: im@beherit.pl
 //---------------------------------------------------------------------------
 
 #ifndef AQQ_H
@@ -29,6 +29,7 @@
 #define AQQ_SYSTEM_NEWSSOURCE_ITEM L"AQQ/System/NewsSource/Item"
 #define AQQ_SYSTEM_GETACCOUNTINFO L"AQQ/System/GetAccountInfo"
 #define AQQ_SYSTEM_POPUP L"AQQ/System/Popup"
+#define AQQ_SYSTEM_MULTIPOPUP L"AQQ/System/MultiPopup"
 #define AQQ_SYSTEM_CHAT_PRESENCE L"AQQ/System/Chat/Presence"
 #define AQQ_SYSTEM_CHAT_OPEN L"AQQ/System/Chat/Open"
 #define AQQ_SYSTEM_CURRENTSONG L"AQQ/System/CurrentSong"
@@ -115,6 +116,7 @@
 #define AQQ_SYSTEM_COLORCHANGE L"AQQ/System/ColorChange"
 #define AQQ_SYSTEM_COLORGETHUE L"AQQ/System/ColorGetHue"
 #define AQQ_SYSTEM_COLORGETSATURATION L"AQQ/System/ColorGetSaturation"
+#define AQQ_SYSTEM_APPVER L"AQQ/System/AppVer"
 
 //Windows
 #define AQQ_WINDOW_SETNOTE_PUTNOTE L"AQQ/Window/SetNote/PutNote"
@@ -222,6 +224,7 @@
 #define AQQ_CONTACTS_RESETAVATAR L"AQQ/Contacts/ResetAvatar"
 #define AQQ_CONTACTS_ATTENTION L"AQQ/Contacts/Attention"
 #define AQQ_CONTACTS_VALIDATEJID L"AQQ/Contacts/ValidateJID"
+#define AQQ_CONTACTS_BUDDY_FETCHSELECTED L"AQQ/Contacts/Buddy/FetchSelected"
 
 //Icons
 #define AQQ_ICONS_LOADPNGICON L"AQQ/Icons/LoadPNGIcon"
@@ -245,6 +248,7 @@
 #define AQQ_FUNCTION_GETAPPFILEPATH L"AQQ/Function/GetAppFilePath"
 #define AQQ_FUNCTION_EXECUTEMSG L"AQQ/Function/ExecuteMsg"
 #define AQQ_FUNCTION_EXECUTEMSG_NOPRIORITY L"AQQ/Function/ExecuteMsg/NoPriority"
+#define AQQ_FUNCTION_MSGWINDOW L"AQQ/Function/Msgwindow"
 #define AQQ_FUNCTION_TABWASCLOSED L"AQQ/Function/TabWasClosed"
 #define AQQ_FUNCTION_TABMOVE L"AQQ/Function/TabMove"
 #define AQQ_FUNCTION_TABCOUNT L"AQQ/Function/TabCount"
@@ -295,6 +299,7 @@
 #define AQQ_FUNCTION_SHA1 L"AQQ/Function/Sha1"
 #define AQQ_FUNCTION_SAY L"AQQ/Function/Say"
 #define AQQ_FUNCTION_BASE64 L"AQQ/Function/Base64"
+#define AQQ_FUNCTION_ISVERSIONHIGHER L"AQQ/Function/IsVersionHigher"
 
 //CONSTANTS-------------------------------------------------------------------
 
@@ -567,6 +572,7 @@ enum TAddonType {
  tatUnCheck,
  tatUnknown,
  tatVisualStyle,
+ tatVisualStylePatch,
  tatSmileys,
  tatPlugin
 };
@@ -1273,6 +1279,20 @@ typedef struct TPluginControl
 } TPluginControl;
 typedef
  TPluginControl* PPluginControl;
+ 
+typedef struct TPluginExecMsg
+{
+ wchar_t* JID;
+ int UserIdx;
+ bool ActionSwitchTo;
+ bool ActionCloseWindow;
+ bool ActionTabIndex;
+ bool ActionTabWasClosed;
+ bool IsPriority;
+ bool IsFromPlugin;
+} TPluginExecMsg;
+typedef
+ TPluginExecMsg* PPluginExecMsg;
  
 typedef INT_PTR (__stdcall *TAQQHook)(WPARAM wParam, LPARAM lParam);
 typedef TAQQHook* PAQQHook;
