@@ -17,6 +17,7 @@
 //System
 #define AQQ_SYSTEM_BEFOREUNLOAD L"AQQ/System/BeforeUnload"
 #define AQQ_SYSTEM_PRECONFIG L"AQQ/System/PreConfig"
+#define AQQ_SYSTEM_NOTIFICATIONCLOSED L"AQQ/System/NotificationClosed"
 #define AQQ_SYSTEM_NEWSSOURCE_ADD L"AQQ/System/NewsSource/Add"
 #define AQQ_SYSTEM_NEWSSOURCE_DELETE L"AQQ/System/NewsSource/Delete"
 #define AQQ_SYSTEM_NEWSSOURCE_UPDATE L"AQQ/System/NewsSource/Update"
@@ -185,6 +186,7 @@
 #define AQQ_CONTACTS_RECVMSG L"AQQ/Contacts/RecvMsg"
 #define AQQ_CONTACTS_ACKMSG L"AQQ/Contacts/AckMsg"
 #define AQQ_CONTACTS_ADDLINE L"AQQ/Contacts/AddLine"
+#define AQQ_CONTACTS_ADDLINEINFO L"AQQ/Contacts/AddLineInfo"
 #define AQQ_CONTACTS_REQUESTLIST L"AQQ/Contacts/RequestList"
 #define AQQ_CONTACTS_REPLYLIST L"AQQ/Contacts/ReplyList"
 #define AQQ_CONTACTS_REPLYLISTEND L"AQQ/Contacts/ReplyListEnd"
@@ -225,7 +227,9 @@
 #define AQQ_CONTACTS_ATTENTION L"AQQ/Contacts/Attention"
 #define AQQ_CONTACTS_VALIDATEJID L"AQQ/Contacts/ValidateJID"
 #define AQQ_CONTACTS_BUDDY_FETCHSELECTED L"AQQ/Contacts/Buddy/FetchSelected"
-
+#define AQQ_CONTACTS_SETINVISIBLE L"AQQ/Contacts/SetInvisible"
+#define AQQ_CONTACTS_GETINVISIBLE L"AQQ/Contacts/GetInvisible"
+  
 //Icons
 #define AQQ_ICONS_LOADPNGICON L"AQQ/Icons/LoadPNGIcon"
 #define AQQ_ICONS_REPLACEPNGICON L"AQQ/Icons/ReplacePNGIcon"
@@ -1293,6 +1297,18 @@ typedef struct TPluginExecMsg
 } TPluginExecMsg;
 typedef
  TPluginExecMsg* PPluginExecMsg;
+ 
+typedef struct TPluginPrivacyItem
+{
+ unsigned char ItemType;
+ wchar_t* Value;
+ unsigned char Msg;
+ unsigned char PresIn;
+ unsigned char PresOut;
+ unsigned char IQ;
+} TPluginPrivacyItem;
+typedef
+ TPluginPrivacyItem* PPluginPrivacyItem;
  
 typedef INT_PTR (__stdcall *TAQQHook)(WPARAM wParam, LPARAM lParam);
 typedef TAQQHook* PAQQHook;
