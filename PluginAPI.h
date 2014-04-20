@@ -304,6 +304,7 @@
 #define AQQ_FUNCTION_SAY L"AQQ/Function/Say"
 #define AQQ_FUNCTION_BASE64 L"AQQ/Function/Base64"
 #define AQQ_FUNCTION_ISVERSIONHIGHER L"AQQ/Function/IsVersionHigher"
+#define AQQ_FUNCTION_GETLANGCODE L"AQQ/Function/GetLangCode"
 
 //CONSTANTS-------------------------------------------------------------------
 
@@ -1068,6 +1069,15 @@ typedef struct TPluginFileTransfer
  } TPluginFileTransfer;
 typedef
  TPluginFileTransfer* PPluginFileTransfer;
+ 
+typedef struct TPluginMicroMsg
+{
+ int cbSize;
+ wchar_t* Msg;
+ bool SaveToArchive;
+ } TPluginMicroMsg;
+typedef
+ TPluginMicroMsg* PPluginMicroMsg; 
 
 typedef struct TPluginInfo
 {
