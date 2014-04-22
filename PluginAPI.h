@@ -107,6 +107,7 @@
 #define AQQ_SYSTEM_PLUGIN_REFRESHLIST L"AQQ/System/Plugin/RefreshList"
 #define AQQ_SYSTEM_PLUGIN_EXCLUDE L"AQQ/System/Plugin/Exclude"
 #define AQQ_SYSTEM_PLUGIN_ACTIVE L"AQQ/System/Plugin/Active"
+#define AQQ_SYSTEM_PLUGIN_BEFOREUNLOAD L"AQQ/System/Plugin/BeforeUnload"
 #define AQQ_SYSTEM_PLAYSOUND L"AQQ/System/Plugin/PlaySound"
 #define AQQ_SYSTEM_ADDONBROWSER_URL L"AQQ/System/AddonBrowser/URL"
 #define AQQ_SYSTEM_SKYPE_CONVSERSATION L"AQQ/System/Skype/Conversation"
