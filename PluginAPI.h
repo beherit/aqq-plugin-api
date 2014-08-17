@@ -115,10 +115,15 @@
 #define AQQ_SYSTEM_LASTURL L"AQQ/System/LastURL"
 #define AQQ_SYSTEM_REGEXP L"AQQ/System/RegExp"
 #define AQQ_SYSTEM_FRAMESETTINGS L"AQQ/System/FrameSettings"
+#define AQQ_SYSTEM_COLORCHANGEV2 L"AQQ/System/ColorChangeV2"
 #define AQQ_SYSTEM_COLORCHANGE L"AQQ/System/ColorChange"
 #define AQQ_SYSTEM_COLORGETHUE L"AQQ/System/ColorGetHue"
 #define AQQ_SYSTEM_COLORGETSATURATION L"AQQ/System/ColorGetSaturation"
+#define AQQ_SYSTEM_COLORGETBRIGHTNESS L"AQQ/System/ColorGetBrightness"
 #define AQQ_SYSTEM_APPVER L"AQQ/System/AppVer"
+#define AQQ_SYSTEM_TRAYICONIMAGE L"AQQ/System/TrayIconImage"
+#define AQQ_SYSTEM_TRAYICONIMAGEPATH L"AQQ/System/TrayIconImagePath"
+#define AQQ_SYSTEM_TRAYICONREFRESH L"AQQ/System/TrayIconRefresh"
 
 //Windows
 #define AQQ_WINDOW_SETNOTE_PUTNOTE L"AQQ/Window/SetNote/PutNote"
@@ -707,6 +712,17 @@ typedef struct TPluginToolTipID
 } TPluginToolTipID;
 typedef
  TPluginToolTipID* PPluginToolTipID;
+ 
+typedef struct TPluginColorChange
+{
+ int cbSize;
+ int Hue;
+ int Saturation;
+ int Brightness;
+} TPluginColorChange;
+typedef
+ TPluginColorChange* PPluginColorChange;
+
 
 typedef struct TPluginSMSResult
 {
