@@ -134,6 +134,7 @@
 #define AQQ_SYSTEM_TRAYICONIMAGE L"AQQ/System/TrayIconImage"
 #define AQQ_SYSTEM_TRAYICONIMAGEPATH L"AQQ/System/TrayIconImagePath"
 #define AQQ_SYSTEM_TRAYICONREFRESH L"AQQ/System/TrayIconRefresh"
+#define AQQ_SYSTEM_LANGCODE_CHANGED L"AQQ/System/LangCodeChanged"
 
 //Windows
 #define AQQ_WINDOW_SETNOTE_PUTNOTE L"AQQ/Window/SetNote/PutNote"
@@ -321,6 +322,7 @@
 #define AQQ_FUNCTION_BASE64 L"AQQ/Function/Base64"
 #define AQQ_FUNCTION_ISVERSIONHIGHER L"AQQ/Function/IsVersionHigher"
 #define AQQ_FUNCTION_GETLANGCODE L"AQQ/Function/GetLangCode"
+#define AQQ_FUNCTION_GETDEFLANGCODE L"AQQ/Function/GetDefLangCode"
 
 //CONSTANTS-------------------------------------------------------------------
 
