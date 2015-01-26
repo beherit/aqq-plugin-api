@@ -305,6 +305,7 @@ void __fastcall LangFrame(TFrame* Form)
   if(!FileExists(FileName)) return;
   TStringList* LangFile = new TStringList;
   LangFile->LoadFromFile(FileName);
+  int Idx;
   for(int stop = Form->ComponentCount - 1, i = 0; i <= stop; i++)
   {
     if(dynamic_cast<TActionList*>(Form->Components[i]))
