@@ -125,12 +125,14 @@ void __fastcall LangForm(TForm* Form)
 	if(dynamic_cast<TsListBox*>(Form->Components[i]))
 	{
 	  Idx = ((TsListBox*)Form->Components[i])->Tag;
-	  if(Idx > 0) ((TsListBox*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+	  if((Idx > 0)&&(((TsListBox*)Form->Components[i])->BoundLabel->Active))
+	   ((TsListBox*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
 	}
 	if(dynamic_cast<TsListView*>(Form->Components[i]))
 	{
 	  Idx = ((TsListView*)Form->Components[i])->Tag;
-	  if(Idx > 0) ((TsListView*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+	  if((Idx > 0)&&(((TsListView*)Form->Components[i])->BoundLabel->Active))
+	   ((TsListView*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
 	  for(int stop2 = ((TsListView*)Form->Components[i])->Columns->Count - 1, j = 0; j <= stop2; j++)
 	  {
 		Idx = ((TsListView*)Form->Components[i])->Column[j]->Tag;
@@ -228,7 +230,8 @@ void __fastcall LangForm(TForm* Form)
 	if(dynamic_cast<TsSpinEdit*>(Form->Components[i]))
 	{
 	  Idx = ((TsSpinEdit*)Form->Components[i])->Tag;
-	  if(Idx > 0) ((TsSpinEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+	  if((Idx > 0)&&(((TsSpinEdit*)Form->Components[i])->BoundLabel->Active))
+	   ((TsSpinEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
 	}
 	if(dynamic_cast<TsButton*>(Form->Components[i]))
 	{
