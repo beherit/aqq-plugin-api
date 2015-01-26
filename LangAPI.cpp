@@ -21,9 +21,11 @@
 
 //---------------------------------------------------------------------------
 #include <vcl.h>
+#include "acSlider.hpp"
 #include "sPageControl.hpp"
 #include "sListBox.hpp"
 #include "sListView.hpp"
+#include "sColorSelect.hpp"
 #include "sComboBox.hpp"
 #include "sComboBoxes.hpp"
 #include "sTrackBar.hpp"
@@ -140,6 +142,11 @@ void __fastcall LangForm(TForm* Form)
 		if(Idx > 0) ((TsListView*)Form->Components[i])->Column[j]->Caption = GetID(LangFile, Idx);
 	  }
 	}
+	if(dynamic_cast<TsColorSelect*>(Form->Components[i]))
+	{
+	  Idx = ((TsColorSelect*)Form->Components[i])->Tag;
+	  if(Idx > 0) ((TsColorSelect*)Form->Components[i])->Hint = GetID(LangFile, Idx);
+	}
 	if(dynamic_cast<TsComboBox*>(Form->Components[i]))
 	{
 	  Idx = ((TsComboBox*)Form->Components[i])->Tag;
@@ -255,6 +262,12 @@ void __fastcall LangForm(TForm* Form)
 		else
 		 ((TsSpinEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
 	  }
+	}
+	if(dynamic_cast<TsSlider*>(Form->Components[i]))
+	{
+	  Idx = ((TsSlider*)Form->Components[i])->Tag;
+	  if((Idx > 0)&&(((TsSlider*)Form->Components[i])->BoundLabel->Active))
+	   ((TsSlider*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
 	}
 	if(dynamic_cast<TsButton*>(Form->Components[i]))
 	{
