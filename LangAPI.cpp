@@ -22,8 +22,10 @@
 //---------------------------------------------------------------------------
 #include <vcl.h>
 #include "sPageControl.hpp"
+#include "sListBox.hpp"
 #include "sListView.hpp"
 #include "sComboBox.hpp"
+#include "sComboBoxes.hpp"
 #include "sTrackBar.hpp"
 #include "sGroupBox.hpp"
 #include "sLabel.hpp"
@@ -120,11 +122,16 @@ void __fastcall LangForm(TForm* Form)
 		if(Idx > 0) ((TMainMenu*)Form->Components[i])->Items[j].Caption = GetID(LangFile, Idx);
 	  }
 	}
+	if(dynamic_cast<TsListBox*>(Form->Components[i]))
+	{
+	  Idx = ((TsListBox*)Form->Components[i])->Tag;
+	  if(Idx > 0) ((TsListBox*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+	}
 	if(dynamic_cast<TsListView*>(Form->Components[i]))
 	{
 	  Idx = ((TsListView*)Form->Components[i])->Tag;
 	  if(Idx > 0) ((TsListView*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
-      for(int stop2 = ((TsListView*)Form->Components[i])->Columns->Count - 1, j = 0; j <= stop2; j++)
+	  for(int stop2 = ((TsListView*)Form->Components[i])->Columns->Count - 1, j = 0; j <= stop2; j++)
 	  {
 		Idx = ((TsListView*)Form->Components[i])->Column[j]->Tag;
 		if(Idx > 0) ((TsListView*)Form->Components[i])->Column[j]->Caption = GetID(LangFile, Idx);
@@ -134,6 +141,11 @@ void __fastcall LangForm(TForm* Form)
 	{
 	  Idx = ((TsComboBox*)Form->Components[i])->Tag;
 	  if(Idx > 0) ((TsComboBox*)Form->Components[i])->Items->Text = GetID(LangFile, Idx);
+	}
+	if(dynamic_cast<TsComboBoxEx*>(Form->Components[i]))
+	{
+	  Idx = ((TsComboBoxEx*)Form->Components[i])->Tag;
+	  if(Idx > 0) ((TsComboBoxEx*)Form->Components[i])->Items->Text = GetID(LangFile, Idx);
 	}
 	if(dynamic_cast<TsTrackBar*>(Form->Components[i]))
 	{
@@ -164,6 +176,16 @@ void __fastcall LangForm(TForm* Form)
 	{
 	  Idx = ((TsWebLabel*)Form->Components[i])->Tag;
 	  if(Idx > 0) ((TsWebLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+	}
+	if(dynamic_cast<TsHTMLLabel*>(Form->Components[i]))
+	{
+	  Idx = ((TsHTMLLabel*)Form->Components[i])->Tag;
+	  if(Idx > 0) ((TsHTMLLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+	}
+	if(dynamic_cast<TsStickyLabel*>(Form->Components[i]))
+	{
+	  Idx = ((TsStickyLabel*)Form->Components[i])->Tag;
+	  if(Idx > 0) ((TsStickyLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
 	}
 	if(dynamic_cast<TLabeledEdit*>(Form->Components[i]))
 	{
