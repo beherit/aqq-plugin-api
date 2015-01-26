@@ -34,6 +34,7 @@
 #include "sStatusBar.hpp"
 #include "sRadioButton.hpp"
 #include "sEdit.hpp"
+#include "sMaskEdit.hpp"
 #include "sSpinEdit.hpp"
 #include "sButton.hpp"
 #include "sSpeedButton.hpp"
@@ -225,13 +226,35 @@ void __fastcall LangForm(TForm* Form)
 	if(dynamic_cast<TsEdit*>(Form->Components[i]))
 	{
 	  Idx = ((TsEdit*)Form->Components[i])->Tag;
-	  if(Idx > 0) ((TsEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+	  if(Idx > 0)
+	  {
+		if(((TsEdit*)Form->Components[i])->BoundLabel->Active)
+		 ((TsEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+		else
+		 ((TsEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+	  }
+	}
+	if(dynamic_cast<TsMaskEdit*>(Form->Components[i]))
+	{
+	  Idx = ((TsMaskEdit*)Form->Components[i])->Tag;
+	  if(Idx > 0)
+	  {
+		if(((TsMaskEdit*)Form->Components[i])->BoundLabel->Active)
+		 ((TsMaskEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+		else
+		 ((TsMaskEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+	  }
 	}
 	if(dynamic_cast<TsSpinEdit*>(Form->Components[i]))
 	{
 	  Idx = ((TsSpinEdit*)Form->Components[i])->Tag;
-	  if((Idx > 0)&&(((TsSpinEdit*)Form->Components[i])->BoundLabel->Active))
-	   ((TsSpinEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+	  if(Idx > 0)
+	  {
+		if(((TsSpinEdit*)Form->Components[i])->BoundLabel->Active)
+		 ((TsSpinEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+		else
+		 ((TsSpinEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+	  }
 	}
 	if(dynamic_cast<TsButton*>(Form->Components[i]))
 	{
