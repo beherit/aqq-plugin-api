@@ -19,14 +19,10 @@
 // Boston, MA 02110-1301, USA.
 //---------------------------------------------------------------------------
 
-#ifndef AQQ_H
-#define AQQ_H
-
-#include "LangAPI.h"
-
-
+//---------------------------------------------------------------------------
+#ifndef PLUGINAPI_H
+#define PLUGINAPI_H
 //HOOKS----------------------------------------------------------------------
-
 //System
 #define AQQ_SYSTEM_BEFOREUNLOAD L"AQQ/System/BeforeUnload"
 #define AQQ_SYSTEM_PRECONFIG L"AQQ/System/PreConfig"
@@ -326,10 +322,9 @@
 #define AQQ_FUNCTION_ISVERSIONHIGHER L"AQQ/Function/IsVersionHigher"
 #define AQQ_FUNCTION_GETLANGCODE L"AQQ/Function/GetLangCode"
 #define AQQ_FUNCTION_GETDEFLANGCODE L"AQQ/Function/GetDefLangCode"
-
+//---------------------------------------------------------------------------
 
 //CONSTANTS-------------------------------------------------------------------
-
 //##001 - Account Events
 #define ACCOUNT_EVENT_DEFAULT 0
 #define ACCOUNT_EVENT_NEW 1
@@ -570,10 +565,9 @@
 #define MODALRES_NONE 0
 #define MODALRES_OK 1
 #define MODALRES_CANCEL 2
-
+//---------------------------------------------------------------------------
 
 //STRUCTURES-----------------------------------------------------------------
-
 enum THintEvent {
   theAuth,
   theTitle,
@@ -1376,15 +1370,13 @@ typedef struct TPluginLink
 } TPluginLink;
 typedef
  TPluginLink* PPluginLink;
-
+//---------------------------------------------------------------------------
 
 //OTHERS----------------------------------------------------------------------
-
 #define CALLSERVICE_NOTFOUND 0x80000000
 #define MAXMODULELABELLENGTH 64
 
 #define PLUGIN_MAKE_VERSION(a,b,c,d) ((((a)&0xFF)<<24)|(((b)&0xFF)<<16)|(((c)&0xFF)<<8)|((d)&0xFF))
 #define PLUGIN_COMPARE_VERSION(a,b) (((DWORD)(a)<(DWORD)(b))?-1:((DWORD)(a)>(DWORD)(b))?1:0)
-
-
+//---------------------------------------------------------------------------
 #endif
