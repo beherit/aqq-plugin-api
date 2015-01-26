@@ -142,7 +142,7 @@ void __fastcall LangForm(TForm* Form)
 	}
 	if(dynamic_cast<TsGroupBox*>(Form->Components[i]))
 	{
-	  Idx = ((TsTrackBar*)Form->Components[i])->Tag;
+	  Idx = ((TsGroupBox*)Form->Components[i])->Tag;
 	  if(Idx > 0) ((TsGroupBox*)Form->Components[i])->Caption = GetID(LangFile, Idx);
 	}
 	if(dynamic_cast<TCategoryPanel*>(Form->Components[i]))
@@ -211,7 +211,7 @@ void __fastcall LangForm(TForm* Form)
 	if(dynamic_cast<TsButton*>(Form->Components[i]))
 	{
 	  Idx = ((TsButton*)Form->Components[i])->Tag;
-	  if((Idx > 0)&&(!((TsEdit*)Form->Components[i])->Action))
+	  if((Idx > 0)&&(!((TsButton*)Form->Components[i])->Action))
 	   ((TsButton*)Form->Components[i])->Caption = GetID(LangFile, Idx);
 	}
 	if(dynamic_cast<TsSpeedButton*>(Form->Components[i]))
