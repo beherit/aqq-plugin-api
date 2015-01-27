@@ -22,6 +22,8 @@
 //---------------------------------------------------------------------------
 #ifndef LANGAPI_H
 #define LANGAPI_H
+#pragma hdrstop
+#pragma comment(lib, "LangAPI")
 //---------------------------------------------------------------------------
 typedef struct TLangCache
 {
