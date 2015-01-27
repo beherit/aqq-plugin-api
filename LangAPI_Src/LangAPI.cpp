@@ -20,26 +20,6 @@
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-#include <vcl.h>
-#include "acSlider.hpp"
-#include "sButton.hpp"
-#include "sCheckBox.hpp"
-#include "sColorSelect.hpp"
-#include "sComboBox.hpp"
-#include "sComboBoxes.hpp"
-#include "sEdit.hpp"
-#include "sGroupBox.hpp"
-#include "sLabel.hpp"
-#include "sListBox.hpp"
-#include "sListView.hpp"
-#include "sMaskEdit.hpp"
-#include "sMemo.hpp"
-#include "sPageControl.hpp"
-#include "sRadioButton.hpp"
-#include "sSpeedButton.hpp"
-#include "sSpinEdit.hpp"
-#include "sStatusBar.hpp"
-#include "sTrackBar.hpp"
 #pragma hdrstop
 #include "LangAPI.h"
 //---------------------------------------------------------------------------
