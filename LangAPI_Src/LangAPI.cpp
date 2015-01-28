@@ -46,7 +46,7 @@ UnicodeString __fastcall GetLangStr(UnicodeString ID)
   TStringList* LangFile = new TStringList;
   try
   {
-	LangFile->LoadFromFile(FileName);
+	LangFile->LoadFromFile(FileName,TEncoding::UTF8);
 	for(int stop = LangFile->Count - 1, count = 0; count <= stop; count++)
     {
 	  if(LangFile->Strings[count].Pos(ID + "=")==1)
@@ -82,7 +82,7 @@ void __fastcall LangForm(TForm* Form)
   UnicodeString FileName = LangPath + Form->ClassName() + ".lng";
   if(!FileExists(FileName)) return;
   TStringList* LangFile = new TStringList;
-  LangFile->LoadFromFile(FileName);
+  LangFile->LoadFromFile(FileName,TEncoding::UTF8);
   int Idx = Form->Tag;
   if(Idx > 0) Form->Caption = GetID(LangFile, Idx);
   for(int stop = Form->ComponentCount - 1, i = 0; i <= stop; i++)
@@ -284,7 +284,7 @@ void __fastcall LangFrame(TFrame* Form)
   UnicodeString FileName = LangPath + Form->ClassName() + ".lng";
   if(!FileExists(FileName)) return;
   TStringList* LangFile = new TStringList;
-  LangFile->LoadFromFile(FileName);
+  LangFile->LoadFromFile(FileName,TEncoding::UTF8);
   int Idx;
   for(int stop = Form->ComponentCount - 1, i = 0; i <= stop; i++)
   {
