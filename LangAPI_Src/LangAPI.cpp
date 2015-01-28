@@ -245,6 +245,14 @@ void __fastcall LangForm(TForm* Form)
 		if(Idx > 0) ((TsPageControl*)Form->Components[i])->Pages[j]->Caption = GetID(LangFile, Idx);
 	  }
 	}
+	if(dynamic_cast<TPopupMenu*>(Form->Components[i]))
+	{
+	  for(int stop2 = ((TPopupMenu*)Form->Components[i])->Items->Count - 1, j = 0; j <= stop2; j++)
+	  {
+		Idx = ((TPopupMenu*)Form->Components[i])->Items->Items[j]->Tag;
+		if(Idx > 0) ((TPopupMenu*)Form->Components[i])->Items->Items[j]->Caption = GetID(LangFile, Idx);
+	  }
+	}
 	if(dynamic_cast<TsRadioButton*>(Form->Components[i]))
 	{
 	  Idx = ((TsRadioButton*)Form->Components[i])->Tag;
@@ -444,6 +452,14 @@ void __fastcall LangFrame(TFrame* Form)
 	  {
 		Idx = ((TsPageControl*)Form->Components[i])->Pages[j]->Tag;
 		if(Idx > 0) ((TsPageControl*)Form->Components[i])->Pages[j]->Caption = GetID(LangFile, Idx);
+	  }
+	}
+	if(dynamic_cast<TPopupMenu*>(Form->Components[i]))
+	{
+	  for(int stop2 = ((TPopupMenu*)Form->Components[i])->Items->Count - 1, j = 0; j <= stop2; j++)
+	  {
+		Idx = ((TPopupMenu*)Form->Components[i])->Items->Items[j]->Tag;
+		if(Idx > 0) ((TPopupMenu*)Form->Components[i])->Items->Items[j]->Caption = GetID(LangFile, Idx);
 	  }
 	}
 	if(dynamic_cast<TsRadioButton*>(Form->Components[i]))
