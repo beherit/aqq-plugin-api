@@ -35,10 +35,10 @@ void __fastcall ClearLngCache()
 
 UnicodeString __fastcall GetLangStr(UnicodeString ID)
 {
-	for(int stop = LangCache.Length - 1, count = 0; count <= stop; count++)
+	for(int Count=0; Count<LangCache.Length; Count++)
 	{
-		if(LangCache[count].StrID == ID)
-			return LangCache[count].StrEntry;
+		if(LangCache[Count].StrID == ID)
+			return LangCache[Count].StrEntry;
 	}
 	UnicodeString FileName = LangPath + "Const.lng";
 	if(!FileExists(FileName)) return "";
@@ -46,12 +46,12 @@ UnicodeString __fastcall GetLangStr(UnicodeString ID)
 	TStringList* LangFile = new TStringList;
 	try
 	{
-		LangFile->LoadFromFile(FileName,TEncoding::UTF8);
-		for(int stop = LangFile->Count - 1, count = 0; count <= stop; count++)
+		LangFile->LoadFromFile(FileName, TEncoding::UTF8);
+		for(int Count=0; Count<LangFile->Count; Count++)
 		{
-			if(LangFile->Strings[count].Pos(ID + "=")==1)
+			if(LangFile->Strings[Count].Pos(ID + "=")==1)
 			{
-				result = LangFile->Strings[count].Delete(1,ID.Length() + 1);
+				result = LangFile->Strings[Count].Delete(1, ID.Length() + 1);
 				break;
 			}
 		}
@@ -70,7 +70,7 @@ UnicodeString __fastcall GetLangStr(UnicodeString ID)
 UnicodeString __fastcall GetID(TStringList* LangFile, int Idx)
 {
 	if(Idx > LangFile->Count) return "???";
-	UnicodeString result = LangFile->Strings[Idx - 1].Delete(1,LangFile->Strings[Idx-1].Pos("="));
+	UnicodeString result = LangFile->Strings[Idx - 1].Delete(1, LangFile->Strings[Idx - 1].Pos("="));
 	result = StringReplace(result, "#", "\x0d\x0a", TReplaceFlags() << rfReplaceAll);
 	result = StringReplace(result, ";", "\x0d\x0a", TReplaceFlags() << rfReplaceAll);
 	return result;
@@ -82,205 +82,205 @@ void __fastcall LangForm(TForm* Form)
 	UnicodeString FileName = LangPath + Form->ClassName() + ".lng";
 	if(!FileExists(FileName)) return;
 	TStringList* LangFile = new TStringList;
-	LangFile->LoadFromFile(FileName,TEncoding::UTF8);
+	LangFile->LoadFromFile(FileName, TEncoding::UTF8);
 	int Idx = Form->Tag;
 	if(Idx > 0) Form->Caption = GetID(LangFile, Idx);
-	for(int stop = Form->ComponentCount - 1, i = 0; i <= stop; i++)
+	for(int Component=0; Component<Form->ComponentCount; Component++)
 	{
-		if(dynamic_cast<TActionList*>(Form->Components[i]))
+		if(dynamic_cast<TActionList*>(Form->Components[Component]))
 		{
-			for(int stop2 = ((TActionList*)Form->Components[i])->ActionCount - 1, j = 0; j <= stop2; j++)
+			for(int Count=0; Count<((TActionList*)Form->Components[Component])->ActionCount; Count++)
 			{
-				Idx = ((TActionList*)Form->Components[i])->Actions[j]->Tag;
+				Idx = ((TActionList*)Form->Components[Component])->Actions[Count]->Tag;
 				if(Idx > 0)
 				{
-					((TActionList*)Form->Components[i])->Actions[j]->Caption = GetID(LangFile, Idx);
-					if(!((TActionList*)Form->Components[i])->Actions[j]->Hint.IsEmpty())
-						((TActionList*)Form->Components[i])->Actions[j]->Hint = GetID(LangFile, Idx);
+					((TActionList*)Form->Components[Component])->Actions[Count]->Caption = GetID(LangFile, Idx);
+					if(!((TActionList*)Form->Components[Component])->Actions[Count]->Hint.IsEmpty())
+						((TActionList*)Form->Components[Component])->Actions[Count]->Hint = GetID(LangFile, Idx);
 				}
 			}
 		}
-		if(dynamic_cast<TsButton*>(Form->Components[i]))
+		if(dynamic_cast<TsButton*>(Form->Components[Component]))
 		{
-			Idx = ((TsButton*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(!((TsButton*)Form->Components[i])->Action))
-				((TsButton*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsButton*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(!((TsButton*)Form->Components[Component])->Action))
+				((TsButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsSpeedButton*>(Form->Components[i]))
+		if(dynamic_cast<TsSpeedButton*>(Form->Components[Component]))
 		{
-			Idx = ((TsSpeedButton*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(!((TsSpeedButton*)Form->Components[i])->Action))
-				((TsSpeedButton*)Form->Components[i])->Caption = GetID(LangFile, Idx);
-			else if((Idx > 0)&&(((TsSpeedButton*)Form->Components[i])->ShowHint))
-				((TsSpeedButton*)Form->Components[i])->Hint = GetID(LangFile, Idx);
+			Idx = ((TsSpeedButton*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(!((TsSpeedButton*)Form->Components[Component])->Action))
+				((TsSpeedButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
+			else if((Idx > 0)&&(((TsSpeedButton*)Form->Components[Component])->ShowHint))
+				((TsSpeedButton*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TCategoryPanel*>(Form->Components[i]))
+		if(dynamic_cast<TCategoryPanel*>(Form->Components[Component]))
 		{
-			Idx = ((TCategoryPanel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TCategoryPanel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TCategoryPanel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TCategoryPanel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsCheckBox*>(Form->Components[i]))
+		if(dynamic_cast<TsCheckBox*>(Form->Components[Component]))
 		{
-			Idx = ((TsCheckBox*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsCheckBox*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsCheckBox*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsCheckBox*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsColorSelect*>(Form->Components[i]))
+		if(dynamic_cast<TsColorSelect*>(Form->Components[Component]))
 		{
-			Idx = ((TsColorSelect*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsColorSelect*)Form->Components[i])->Hint = GetID(LangFile, Idx);
+			Idx = ((TsColorSelect*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsColorSelect*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsComboBox*>(Form->Components[i]))
+		if(dynamic_cast<TsComboBox*>(Form->Components[Component]))
 		{
-			Idx = ((TsComboBox*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsComboBox*)Form->Components[i])->Items->Text = GetID(LangFile, Idx);
+			Idx = ((TsComboBox*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsComboBox*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsComboBoxEx*>(Form->Components[i]))
+		if(dynamic_cast<TsComboBoxEx*>(Form->Components[Component]))
 		{
-			Idx = ((TsComboBoxEx*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsComboBoxEx*)Form->Components[i])->Items->Text = GetID(LangFile, Idx);
+			Idx = ((TsComboBoxEx*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsComboBoxEx*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsEdit*>(Form->Components[i]))
+		if(dynamic_cast<TsEdit*>(Form->Components[Component]))
 		{
-			Idx = ((TsEdit*)Form->Components[i])->Tag;
+			Idx = ((TsEdit*)Form->Components[Component])->Tag;
 			if(Idx > 0)
 			{
-				if(((TsEdit*)Form->Components[i])->BoundLabel->Active)
-					((TsEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+				if(((TsEdit*)Form->Components[Component])->BoundLabel->Active)
+					((TsEdit*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 				else
-					((TsEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+					((TsEdit*)Form->Components[Component])->TextHint = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsMaskEdit*>(Form->Components[i]))
+		if(dynamic_cast<TsMaskEdit*>(Form->Components[Component]))
 		{
-			Idx = ((TsMaskEdit*)Form->Components[i])->Tag;
+			Idx = ((TsMaskEdit*)Form->Components[Component])->Tag;
 			if(Idx > 0)
 			{
-				if(((TsMaskEdit*)Form->Components[i])->BoundLabel->Active)
-					((TsMaskEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+				if(((TsMaskEdit*)Form->Components[Component])->BoundLabel->Active)
+					((TsMaskEdit*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 				else
-					((TsMaskEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+					((TsMaskEdit*)Form->Components[Component])->TextHint = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsSpinEdit*>(Form->Components[i]))
+		if(dynamic_cast<TsSpinEdit*>(Form->Components[Component]))
 		{
-			Idx = ((TsSpinEdit*)Form->Components[i])->Tag;
+			Idx = ((TsSpinEdit*)Form->Components[Component])->Tag;
 			if(Idx > 0)
 			{
-				if(((TsSpinEdit*)Form->Components[i])->BoundLabel->Active)
-					((TsSpinEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+				if(((TsSpinEdit*)Form->Components[Component])->BoundLabel->Active)
+					((TsSpinEdit*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 				else
-					((TsSpinEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+					((TsSpinEdit*)Form->Components[Component])->TextHint = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsGroupBox*>(Form->Components[i]))
+		if(dynamic_cast<TsGroupBox*>(Form->Components[Component]))
 		{
-			Idx = ((TsGroupBox*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsGroupBox*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsGroupBox*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsGroupBox*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsLabel*>(Form->Components[i]))
+		if(dynamic_cast<TsLabel*>(Form->Components[Component]))
 		{
-			Idx = ((TsLabel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsLabel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsLabel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsLabelFX*>(Form->Components[i]))
+		if(dynamic_cast<TsLabelFX*>(Form->Components[Component]))
 		{
-			Idx = ((TsLabelFX*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsLabelFX*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsLabelFX*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsLabelFX*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsHTMLLabel*>(Form->Components[i]))
+		if(dynamic_cast<TsHTMLLabel*>(Form->Components[Component]))
 		{
-			Idx = ((TsHTMLLabel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsHTMLLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsHTMLLabel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsHTMLLabel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsWebLabel*>(Form->Components[i]))
+		if(dynamic_cast<TsWebLabel*>(Form->Components[Component]))
 		{
-			Idx = ((TsWebLabel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsWebLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsWebLabel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsWebLabel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsStickyLabel*>(Form->Components[i]))
+		if(dynamic_cast<TsStickyLabel*>(Form->Components[Component]))
 		{
-			Idx = ((TsStickyLabel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsStickyLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsStickyLabel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsStickyLabel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TLabeledEdit*>(Form->Components[i]))
+		if(dynamic_cast<TLabeledEdit*>(Form->Components[Component]))
 		{
-			Idx = ((TLabeledEdit*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TLabeledEdit*)Form->Components[i])->EditLabel->Caption = GetID(LangFile, Idx);
+			Idx = ((TLabeledEdit*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TLabeledEdit*)Form->Components[Component])->EditLabel->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsListBox*>(Form->Components[i]))
+		if(dynamic_cast<TsListBox*>(Form->Components[Component]))
 		{
-			Idx = ((TsListBox*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(((TsListBox*)Form->Components[i])->BoundLabel->Active))
-				((TsListBox*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+			Idx = ((TsListBox*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(((TsListBox*)Form->Components[Component])->BoundLabel->Active))
+				((TsListBox*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsListView*>(Form->Components[i]))
+		if(dynamic_cast<TsListView*>(Form->Components[Component]))
 		{
-			Idx = ((TsListView*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(((TsListView*)Form->Components[i])->BoundLabel->Active))
-				((TsListView*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
-			for(int stop2 = ((TsListView*)Form->Components[i])->Columns->Count - 1, j = 0; j <= stop2; j++)
+			Idx = ((TsListView*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(((TsListView*)Form->Components[Component])->BoundLabel->Active))
+				((TsListView*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
+			for(int Count=0; Count<((TsListView*)Form->Components[Component])->Columns->Count; Count++)
 			{
-				Idx = ((TsListView*)Form->Components[i])->Column[j]->Tag;
-				if(Idx > 0) ((TsListView*)Form->Components[i])->Column[j]->Caption = GetID(LangFile, Idx);
+				Idx = ((TsListView*)Form->Components[Component])->Column[Count]->Tag;
+				if(Idx > 0) ((TsListView*)Form->Components[Component])->Column[Count]->Caption = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TMainMenu*>(Form->Components[i]))
+		if(dynamic_cast<TMainMenu*>(Form->Components[Component]))
 		{
-			for(int stop2 = ((TMainMenu*)Form->Components[i])->Items->Count - 1, j = 0; j <= stop2; j++)
+			for(int Count=0; Count<((TMainMenu*)Form->Components[Component])->Items->Count; Count++)
 			{
-				Idx = ((TMainMenu*)Form->Components[i])->Items[j].Tag;
-				if(Idx > 0) ((TMainMenu*)Form->Components[i])->Items[j].Caption = GetID(LangFile, Idx);
+				Idx = ((TMainMenu*)Form->Components[Component])->Items[Count].Tag;
+				if(Idx > 0) ((TMainMenu*)Form->Components[Component])->Items[Count].Caption = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsMemo*>(Form->Components[i]))
+		if(dynamic_cast<TsMemo*>(Form->Components[Component]))
 		{
-			Idx = ((TsMemo*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsMemo*)Form->Components[i])->Text = GetID(LangFile, Idx);
+			Idx = ((TsMemo*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsMemo*)Form->Components[Component])->Text = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsPageControl*>(Form->Components[i]))
+		if(dynamic_cast<TsPageControl*>(Form->Components[Component]))
 		{
-			for(int stop2 = ((TsPageControl*)Form->Components[i])->PageCount - 1, j = 0; j <= stop2; j++)
+			for(int Count=0; Count<((TsPageControl*)Form->Components[Component])->PageCount; Count++)
 			{
-				Idx = ((TsPageControl*)Form->Components[i])->Pages[j]->Tag;
-				if(Idx > 0) ((TsPageControl*)Form->Components[i])->Pages[j]->Caption = GetID(LangFile, Idx);
+				Idx = ((TsPageControl*)Form->Components[Component])->Pages[Count]->Tag;
+				if(Idx > 0) ((TsPageControl*)Form->Components[Component])->Pages[Count]->Caption = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TPopupMenu*>(Form->Components[i]))
+		if(dynamic_cast<TPopupMenu*>(Form->Components[Component]))
 		{
-			for(int stop2 = ((TPopupMenu*)Form->Components[i])->Items->Count - 1, j = 0; j <= stop2; j++)
+			for(int Count=0; Count<((TPopupMenu*)Form->Components[Component])->Items->Count; Count++)
 			{
-				Idx = ((TPopupMenu*)Form->Components[i])->Items->Items[j]->Tag;
-				if(Idx > 0) ((TPopupMenu*)Form->Components[i])->Items->Items[j]->Caption = GetID(LangFile, Idx);
+				Idx = ((TPopupMenu*)Form->Components[Component])->Items->Items[Count]->Tag;
+				if(Idx > 0) ((TPopupMenu*)Form->Components[Component])->Items->Items[Count]->Caption = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsRadioButton*>(Form->Components[i]))
+		if(dynamic_cast<TsRadioButton*>(Form->Components[Component]))
 		{
-			Idx = ((TsRadioButton*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsRadioButton*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsRadioButton*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsRadioButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsSlider*>(Form->Components[i]))
+		if(dynamic_cast<TsSlider*>(Form->Components[Component]))
 		{
-			Idx = ((TsSlider*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(((TsSlider*)Form->Components[i])->BoundLabel->Active))
-				((TsSlider*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+			Idx = ((TsSlider*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(((TsSlider*)Form->Components[Component])->BoundLabel->Active))
+				((TsSlider*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsStatusBar*>(Form->Components[i]))
+		if(dynamic_cast<TsStatusBar*>(Form->Components[Component]))
 		{
-			Idx = ((TsStatusBar*)Form->Components[i])->Tag;
+			Idx = ((TsStatusBar*)Form->Components[Component])->Tag;
 			if(Idx > 0)
 			{
-				((TsStatusBar*)Form->Components[i])->SimpleText = GetID(LangFile, Idx);
-				if(!((TsStatusBar*)Form->Components[i])->SimplePanel)
+				((TsStatusBar*)Form->Components[Component])->SimpleText = GetID(LangFile, Idx);
+				if(!((TsStatusBar*)Form->Components[Component])->SimplePanel)
 				{
-					if(((TsStatusBar*)Form->Components[i])->Panels->Count > 0)
-						((TsStatusBar*)Form->Components[i])->Panels->Items[0]->Text = GetID(LangFile, Idx);
+					if(((TsStatusBar*)Form->Components[Component])->Panels->Count > 0)
+						((TsStatusBar*)Form->Components[Component])->Panels->Items[0]->Text = GetID(LangFile, Idx);
 				}
 			}
 		}
-		if(dynamic_cast<TsTrackBar*>(Form->Components[i]))
+		if(dynamic_cast<TsTrackBar*>(Form->Components[Component]))
 		{
-			Idx = ((TsTrackBar*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsTrackBar*)Form->Components[i])->Hint = GetID(LangFile, Idx);
+			Idx = ((TsTrackBar*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsTrackBar*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
 		}
 	}
 	delete LangFile;
@@ -292,204 +292,204 @@ void __fastcall LangFrame(TFrame* Form)
 	UnicodeString FileName = LangPath + Form->ClassName() + ".lng";
 	if(!FileExists(FileName)) return;
 	TStringList* LangFile = new TStringList;
-	LangFile->LoadFromFile(FileName,TEncoding::UTF8);
+	LangFile->LoadFromFile(FileName, TEncoding::UTF8);
 	int Idx;
-	for(int stop = Form->ComponentCount - 1, i = 0; i <= stop; i++)
+	for(int Component=0; Component<Form->ComponentCount; Component++)
 	{
-		if(dynamic_cast<TActionList*>(Form->Components[i]))
+		if(dynamic_cast<TActionList*>(Form->Components[Component]))
 		{
-			for(int stop2 = ((TActionList*)Form->Components[i])->ActionCount - 1, j = 0; j <= stop2; j++)
+			for(int Count=0; Count<((TActionList*)Form->Components[Component])->ActionCount; Count++)
 			{
-				Idx = ((TActionList*)Form->Components[i])->Actions[j]->Tag;
+				Idx = ((TActionList*)Form->Components[Component])->Actions[Count]->Tag;
 				if(Idx > 0)
 				{
-					((TActionList*)Form->Components[i])->Actions[j]->Caption = GetID(LangFile, Idx);
-					if(!((TActionList*)Form->Components[i])->Actions[j]->Hint.IsEmpty())
-						((TActionList*)Form->Components[i])->Actions[j]->Hint = GetID(LangFile, Idx);
+					((TActionList*)Form->Components[Component])->Actions[Count]->Caption = GetID(LangFile, Idx);
+					if(!((TActionList*)Form->Components[Component])->Actions[Count]->Hint.IsEmpty())
+						((TActionList*)Form->Components[Component])->Actions[Count]->Hint = GetID(LangFile, Idx);
 				}
 			}
 		}
-		if(dynamic_cast<TsButton*>(Form->Components[i]))
+		if(dynamic_cast<TsButton*>(Form->Components[Component]))
 		{
-			Idx = ((TsButton*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(!((TsButton*)Form->Components[i])->Action))
-				((TsButton*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsButton*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(!((TsButton*)Form->Components[Component])->Action))
+				((TsButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsSpeedButton*>(Form->Components[i]))
+		if(dynamic_cast<TsSpeedButton*>(Form->Components[Component]))
 		{
-			Idx = ((TsSpeedButton*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(!((TsSpeedButton*)Form->Components[i])->Action))
-				((TsSpeedButton*)Form->Components[i])->Caption = GetID(LangFile, Idx);
-			else if((Idx > 0)&&(((TsSpeedButton*)Form->Components[i])->ShowHint))
-				((TsSpeedButton*)Form->Components[i])->Hint = GetID(LangFile, Idx);
+			Idx = ((TsSpeedButton*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(!((TsSpeedButton*)Form->Components[Component])->Action))
+				((TsSpeedButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
+			else if((Idx > 0)&&(((TsSpeedButton*)Form->Components[Component])->ShowHint))
+				((TsSpeedButton*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TCategoryPanel*>(Form->Components[i]))
+		if(dynamic_cast<TCategoryPanel*>(Form->Components[Component]))
 		{
-			Idx = ((TCategoryPanel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TCategoryPanel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TCategoryPanel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TCategoryPanel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsCheckBox*>(Form->Components[i]))
+		if(dynamic_cast<TsCheckBox*>(Form->Components[Component]))
 		{
-			Idx = ((TsCheckBox*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsCheckBox*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsCheckBox*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsCheckBox*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsColorSelect*>(Form->Components[i]))
+		if(dynamic_cast<TsColorSelect*>(Form->Components[Component]))
 		{
-			Idx = ((TsColorSelect*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsColorSelect*)Form->Components[i])->Hint = GetID(LangFile, Idx);
+			Idx = ((TsColorSelect*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsColorSelect*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsComboBox*>(Form->Components[i]))
+		if(dynamic_cast<TsComboBox*>(Form->Components[Component]))
 		{
-			Idx = ((TsComboBox*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsComboBox*)Form->Components[i])->Items->Text = GetID(LangFile, Idx);
+			Idx = ((TsComboBox*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsComboBox*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsComboBoxEx*>(Form->Components[i]))
+		if(dynamic_cast<TsComboBoxEx*>(Form->Components[Component]))
 		{
-			Idx = ((TsComboBoxEx*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsComboBoxEx*)Form->Components[i])->Items->Text = GetID(LangFile, Idx);
+			Idx = ((TsComboBoxEx*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsComboBoxEx*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsEdit*>(Form->Components[i]))
+		if(dynamic_cast<TsEdit*>(Form->Components[Component]))
 		{
-			Idx = ((TsEdit*)Form->Components[i])->Tag;
+			Idx = ((TsEdit*)Form->Components[Component])->Tag;
 			if(Idx > 0)
 			{
-				if(((TsEdit*)Form->Components[i])->BoundLabel->Active)
-					((TsEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+				if(((TsEdit*)Form->Components[Component])->BoundLabel->Active)
+					((TsEdit*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 				else
-					((TsEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+					((TsEdit*)Form->Components[Component])->TextHint = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsMaskEdit*>(Form->Components[i]))
+		if(dynamic_cast<TsMaskEdit*>(Form->Components[Component]))
 		{
-			Idx = ((TsMaskEdit*)Form->Components[i])->Tag;
+			Idx = ((TsMaskEdit*)Form->Components[Component])->Tag;
 			if(Idx > 0)
 			{
-				if(((TsMaskEdit*)Form->Components[i])->BoundLabel->Active)
-					((TsMaskEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+				if(((TsMaskEdit*)Form->Components[Component])->BoundLabel->Active)
+					((TsMaskEdit*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 				else
-					((TsMaskEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+					((TsMaskEdit*)Form->Components[Component])->TextHint = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsSpinEdit*>(Form->Components[i]))
+		if(dynamic_cast<TsSpinEdit*>(Form->Components[Component]))
 		{
-			Idx = ((TsSpinEdit*)Form->Components[i])->Tag;
+			Idx = ((TsSpinEdit*)Form->Components[Component])->Tag;
 			if(Idx > 0)
 			{
-				if(((TsSpinEdit*)Form->Components[i])->BoundLabel->Active)
-					((TsSpinEdit*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+				if(((TsSpinEdit*)Form->Components[Component])->BoundLabel->Active)
+					((TsSpinEdit*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 				else
-					((TsSpinEdit*)Form->Components[i])->TextHint = GetID(LangFile, Idx);
+					((TsSpinEdit*)Form->Components[Component])->TextHint = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsGroupBox*>(Form->Components[i]))
+		if(dynamic_cast<TsGroupBox*>(Form->Components[Component]))
 		{
-			Idx = ((TsGroupBox*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsGroupBox*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsGroupBox*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsGroupBox*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsLabel*>(Form->Components[i]))
+		if(dynamic_cast<TsLabel*>(Form->Components[Component]))
 		{
-			Idx = ((TsLabel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsLabel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsLabel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsLabelFX*>(Form->Components[i]))
+		if(dynamic_cast<TsLabelFX*>(Form->Components[Component]))
 		{
-			Idx = ((TsLabelFX*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsLabelFX*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsLabelFX*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsLabelFX*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsHTMLLabel*>(Form->Components[i]))
+		if(dynamic_cast<TsHTMLLabel*>(Form->Components[Component]))
 		{
-			Idx = ((TsHTMLLabel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsHTMLLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsHTMLLabel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsHTMLLabel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsWebLabel*>(Form->Components[i]))
+		if(dynamic_cast<TsWebLabel*>(Form->Components[Component]))
 		{
-			Idx = ((TsWebLabel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsWebLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsWebLabel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsWebLabel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsStickyLabel*>(Form->Components[i]))
+		if(dynamic_cast<TsStickyLabel*>(Form->Components[Component]))
 		{
-			Idx = ((TsStickyLabel*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsStickyLabel*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsStickyLabel*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsStickyLabel*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TLabeledEdit*>(Form->Components[i]))
+		if(dynamic_cast<TLabeledEdit*>(Form->Components[Component]))
 		{
-			Idx = ((TLabeledEdit*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TLabeledEdit*)Form->Components[i])->EditLabel->Caption = GetID(LangFile, Idx);
+			Idx = ((TLabeledEdit*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TLabeledEdit*)Form->Components[Component])->EditLabel->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsListBox*>(Form->Components[i]))
+		if(dynamic_cast<TsListBox*>(Form->Components[Component]))
 		{
-			Idx = ((TsListBox*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(((TsListBox*)Form->Components[i])->BoundLabel->Active))
-				((TsListBox*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+			Idx = ((TsListBox*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(((TsListBox*)Form->Components[Component])->BoundLabel->Active))
+				((TsListBox*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsListView*>(Form->Components[i]))
+		if(dynamic_cast<TsListView*>(Form->Components[Component]))
 		{
-			Idx = ((TsListView*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(((TsListView*)Form->Components[i])->BoundLabel->Active))
-				((TsListView*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
-			for(int stop2 = ((TsListView*)Form->Components[i])->Columns->Count - 1, j = 0; j <= stop2; j++)
+			Idx = ((TsListView*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(((TsListView*)Form->Components[Component])->BoundLabel->Active))
+				((TsListView*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
+			for(int Count=0; Count<((TsListView*)Form->Components[Component])->Columns->Count; Count++)
 			{
-				Idx = ((TsListView*)Form->Components[i])->Column[j]->Tag;
-				if(Idx > 0) ((TsListView*)Form->Components[i])->Column[j]->Caption = GetID(LangFile, Idx);
+				Idx = ((TsListView*)Form->Components[Component])->Column[Count]->Tag;
+				if(Idx > 0) ((TsListView*)Form->Components[Component])->Column[Count]->Caption = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TMainMenu*>(Form->Components[i]))
+		if(dynamic_cast<TMainMenu*>(Form->Components[Component]))
 		{
-			for(int stop2 = ((TMainMenu*)Form->Components[i])->Items->Count - 1, j = 0; j <= stop2; j++)
+			for(int Count=0; Count<((TMainMenu*)Form->Components[Component])->Items->Count; Count++)
 			{
-				Idx = ((TMainMenu*)Form->Components[i])->Items[j].Tag;
-				if(Idx > 0) ((TMainMenu*)Form->Components[i])->Items[j].Caption = GetID(LangFile, Idx);
+				Idx = ((TMainMenu*)Form->Components[Component])->Items[Count].Tag;
+				if(Idx > 0) ((TMainMenu*)Form->Components[Component])->Items[Count].Caption = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsMemo*>(Form->Components[i]))
+		if(dynamic_cast<TsMemo*>(Form->Components[Component]))
 		{
-			Idx = ((TsMemo*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsMemo*)Form->Components[i])->Text = GetID(LangFile, Idx);
+			Idx = ((TsMemo*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsMemo*)Form->Components[Component])->Text = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsPageControl*>(Form->Components[i]))
+		if(dynamic_cast<TsPageControl*>(Form->Components[Component]))
 		{
-			for(int stop2 = ((TsPageControl*)Form->Components[i])->PageCount - 1, j = 0; j <= stop2; j++)
+			for(int Count=0; Count<((TsPageControl*)Form->Components[Component])->PageCount; Count++)
 			{
-				Idx = ((TsPageControl*)Form->Components[i])->Pages[j]->Tag;
-				if(Idx > 0) ((TsPageControl*)Form->Components[i])->Pages[j]->Caption = GetID(LangFile, Idx);
+				Idx = ((TsPageControl*)Form->Components[Component])->Pages[Count]->Tag;
+				if(Idx > 0) ((TsPageControl*)Form->Components[Component])->Pages[Count]->Caption = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TPopupMenu*>(Form->Components[i]))
+		if(dynamic_cast<TPopupMenu*>(Form->Components[Component]))
 		{
-			for(int stop2 = ((TPopupMenu*)Form->Components[i])->Items->Count - 1, j = 0; j <= stop2; j++)
+			for(int Count=0; Count<((TPopupMenu*)Form->Components[Component])->Items->Count; Count++)
 			{
-				Idx = ((TPopupMenu*)Form->Components[i])->Items->Items[j]->Tag;
-				if(Idx > 0) ((TPopupMenu*)Form->Components[i])->Items->Items[j]->Caption = GetID(LangFile, Idx);
+				Idx = ((TPopupMenu*)Form->Components[Component])->Items->Items[Count]->Tag;
+				if(Idx > 0) ((TPopupMenu*)Form->Components[Component])->Items->Items[Count]->Caption = GetID(LangFile, Idx);
 			}
 		}
-		if(dynamic_cast<TsRadioButton*>(Form->Components[i]))
+		if(dynamic_cast<TsRadioButton*>(Form->Components[Component]))
 		{
-			Idx = ((TsRadioButton*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsRadioButton*)Form->Components[i])->Caption = GetID(LangFile, Idx);
+			Idx = ((TsRadioButton*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsRadioButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsSlider*>(Form->Components[i]))
+		if(dynamic_cast<TsSlider*>(Form->Components[Component]))
 		{
-			Idx = ((TsSlider*)Form->Components[i])->Tag;
-			if((Idx > 0)&&(((TsSlider*)Form->Components[i])->BoundLabel->Active))
-				((TsSlider*)Form->Components[i])->BoundLabel->Caption = GetID(LangFile, Idx);
+			Idx = ((TsSlider*)Form->Components[Component])->Tag;
+			if((Idx > 0)&&(((TsSlider*)Form->Components[Component])->BoundLabel->Active))
+				((TsSlider*)Form->Components[Component])->BoundLabel->Caption = GetID(LangFile, Idx);
 		}
-		if(dynamic_cast<TsStatusBar*>(Form->Components[i]))
+		if(dynamic_cast<TsStatusBar*>(Form->Components[Component]))
 		{
-			Idx = ((TsStatusBar*)Form->Components[i])->Tag;
+			Idx = ((TsStatusBar*)Form->Components[Component])->Tag;
 			if(Idx > 0)
 			{
-				((TsStatusBar*)Form->Components[i])->SimpleText = GetID(LangFile, Idx);
-				if(!((TsStatusBar*)Form->Components[i])->SimplePanel)
+				((TsStatusBar*)Form->Components[Component])->SimpleText = GetID(LangFile, Idx);
+				if(!((TsStatusBar*)Form->Components[Component])->SimplePanel)
 				{
-					if(((TsStatusBar*)Form->Components[i])->Panels->Count > 0)
-						((TsStatusBar*)Form->Components[i])->Panels->Items[0]->Text = GetID(LangFile, Idx);
+					if(((TsStatusBar*)Form->Components[Component])->Panels->Count > 0)
+						((TsStatusBar*)Form->Components[Component])->Panels->Items[0]->Text = GetID(LangFile, Idx);
 				}
 			}
 		}
-		if(dynamic_cast<TsTrackBar*>(Form->Components[i]))
+		if(dynamic_cast<TsTrackBar*>(Form->Components[Component]))
 		{
-			Idx = ((TsTrackBar*)Form->Components[i])->Tag;
-			if(Idx > 0) ((TsTrackBar*)Form->Components[i])->Hint = GetID(LangFile, Idx);
+			Idx = ((TsTrackBar*)Form->Components[Component])->Tag;
+			if(Idx > 0) ((TsTrackBar*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
 		}
 	}
 	delete LangFile;
