@@ -57,8 +57,8 @@
 //---------------------------------------------------------------------------
 typedef struct TLangCache
 {
-  UnicodeString StrID;
-  UnicodeString StrEntry;
+	UnicodeString StrID;
+	UnicodeString StrEntry;
 } TLangCache;
 UnicodeString __fastcall GetLangStr(UnicodeString ID);
 void __fastcall LangForm(TForm* Form);
