@@ -235,7 +235,13 @@ void __fastcall LangForm(TForm* Form)
 		if(dynamic_cast<TsMemo*>(Form->Components[Component]))
 		{
 			Idx = ((TsMemo*)Form->Components[Component])->Tag;
-			if(Idx > 0) ((TsMemo*)Form->Components[Component])->Text = GetID(LangFile, Idx);
+			if(Idx > 0)
+			{
+				if(((TsMemo*)Form->Components[Component])->ShowHint)
+					((TsMemo*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
+				else
+					((TsMemo*)Form->Components[Component])->Text = GetID(LangFile, Idx);
+			}
 		}
 		if(dynamic_cast<TsPageControl*>(Form->Components[Component]))
 		{
