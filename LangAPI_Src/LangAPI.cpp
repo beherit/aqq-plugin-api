@@ -109,10 +109,13 @@ void __fastcall LangForm(TForm* Form)
 		if(dynamic_cast<TsSpeedButton*>(Form->Components[Component]))
 		{
 			Idx = ((TsSpeedButton*)Form->Components[Component])->Tag;
-			if((Idx > 0)&&(!((TsSpeedButton*)Form->Components[Component])->Action))
-				((TsSpeedButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
-			else if((Idx > 0)&&(((TsSpeedButton*)Form->Components[Component])->ShowHint))
-				((TsSpeedButton*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
+			if(Idx > 0)
+			{
+				if(((TsSpeedButton*)Form->Components[Component])->ShowHint)
+					((TsSpeedButton*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
+				else if(((TsSpeedButton*)Form->Components[Component])->Action)
+					((TsSpeedButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
+			}
 		}
 		if(dynamic_cast<TCategoryPanel*>(Form->Components[Component]))
 		{
@@ -324,10 +327,13 @@ void __fastcall LangFrame(TFrame* Form)
 		if(dynamic_cast<TsSpeedButton*>(Form->Components[Component]))
 		{
 			Idx = ((TsSpeedButton*)Form->Components[Component])->Tag;
-			if((Idx > 0)&&(!((TsSpeedButton*)Form->Components[Component])->Action))
-				((TsSpeedButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
-			else if((Idx > 0)&&(((TsSpeedButton*)Form->Components[Component])->ShowHint))
-				((TsSpeedButton*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
+			if(Idx > 0)
+			{
+				if(((TsSpeedButton*)Form->Components[Component])->ShowHint)
+					((TsSpeedButton*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
+				else if(((TsSpeedButton*)Form->Components[Component])->Action)
+					((TsSpeedButton*)Form->Components[Component])->Caption = GetID(LangFile, Idx);
+			}
 		}
 		if(dynamic_cast<TCategoryPanel*>(Form->Components[Component]))
 		{
@@ -450,7 +456,13 @@ void __fastcall LangFrame(TFrame* Form)
 		if(dynamic_cast<TsMemo*>(Form->Components[Component]))
 		{
 			Idx = ((TsMemo*)Form->Components[Component])->Tag;
-			if(Idx > 0) ((TsMemo*)Form->Components[Component])->Text = GetID(LangFile, Idx);
+			if(Idx > 0)
+			{
+				if(((TsMemo*)Form->Components[Component])->ShowHint)
+					((TsMemo*)Form->Components[Component])->Hint = GetID(LangFile, Idx);
+				else
+					((TsMemo*)Form->Components[Component])->Text = GetID(LangFile, Idx);
+			}
 		}
 		if(dynamic_cast<TsPageControl*>(Form->Components[Component]))
 		{
