@@ -52,6 +52,7 @@ UnicodeString __fastcall GetLangStr(UnicodeString ID)
 			if(LangFile->Strings[Count].Pos(ID + "=")==1)
 			{
 				result = LangFile->Strings[Count].Delete(1, ID.Length() + 1);
+				result = StringReplace(result, "#", "\x0d\x0a", TReplaceFlags() << rfReplaceAll);
 				break;
 			}
 		}
@@ -72,7 +73,6 @@ UnicodeString __fastcall GetID(TStringList* LangFile, int Idx)
 	if(Idx > LangFile->Count) return "???";
 	UnicodeString result = LangFile->Strings[Idx - 1].Delete(1, LangFile->Strings[Idx - 1].Pos("="));
 	result = StringReplace(result, "#", "\x0d\x0a", TReplaceFlags() << rfReplaceAll);
-	result = StringReplace(result, ";", "\x0d\x0a", TReplaceFlags() << rfReplaceAll);
 	return result;
 }
 //---------------------------------------------------------------------------
