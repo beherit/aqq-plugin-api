@@ -135,12 +135,22 @@ void __fastcall LangForm(TForm* Form)
 		if(dynamic_cast<TsComboBox*>(Form->Components[Component]))
 		{
 			Idx = ((TsComboBox*)Form->Components[Component])->Tag;
-			if(Idx > 0) ((TsComboBox*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
+			if(Idx > 0)
+			{
+				int ItemIndex = ((TsComboBox*)Form->Components[Component])->ItemIndex;
+				((TsComboBox*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
+				((TsComboBox*)Form->Components[Component])->ItemIndex = ItemIndex;
+			}
 		}
 		if(dynamic_cast<TsComboBoxEx*>(Form->Components[Component]))
 		{
 			Idx = ((TsComboBoxEx*)Form->Components[Component])->Tag;
-			if(Idx > 0) ((TsComboBoxEx*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
+			if(Idx > 0)
+			{
+				int ItemIndex = ((TsComboBoxEx*)Form->Components[Component])->ItemIndex;
+				((TsComboBoxEx*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
+				((TsComboBoxEx*)Form->Components[Component])->ItemIndex = ItemIndex;
+			}
 		}
 		if(dynamic_cast<TsEdit*>(Form->Components[Component]))
 		{
@@ -353,12 +363,22 @@ void __fastcall LangFrame(TFrame* Form)
 		if(dynamic_cast<TsComboBox*>(Form->Components[Component]))
 		{
 			Idx = ((TsComboBox*)Form->Components[Component])->Tag;
-			if(Idx > 0) ((TsComboBox*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
+			if(Idx > 0)
+			{
+				int ItemIndex = ((TsComboBox*)Form->Components[Component])->ItemIndex;
+				((TsComboBox*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
+				((TsComboBox*)Form->Components[Component])->ItemIndex = ItemIndex;
+			}
 		}
 		if(dynamic_cast<TsComboBoxEx*>(Form->Components[Component]))
 		{
 			Idx = ((TsComboBoxEx*)Form->Components[Component])->Tag;
-			if(Idx > 0) ((TsComboBoxEx*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
+			if(Idx > 0)
+			{
+				int ItemIndex = ((TsComboBoxEx*)Form->Components[Component])->ItemIndex;
+				((TsComboBoxEx*)Form->Components[Component])->Items->Text = GetID(LangFile, Idx);
+				((TsComboBoxEx*)Form->Components[Component])->ItemIndex = ItemIndex;
+			}
 		}
 		if(dynamic_cast<TsEdit*>(Form->Components[Component]))
 		{
