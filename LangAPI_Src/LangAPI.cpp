@@ -27,13 +27,13 @@ DynamicArray<TLangCache> LangCache;
 UnicodeString LangPath;
 //---------------------------------------------------------------------------
 
-void __fastcall ClearLngCache()
+void ClearLngCache()
 {
 	LangCache.Length = 0;
 }
 //---------------------------------------------------------------------------
 
-UnicodeString __fastcall GetLangStr(UnicodeString ID)
+UnicodeString GetLangStr(UnicodeString ID)
 {
 	for(int Count=0; Count<LangCache.Length; Count++)
 	{
@@ -62,7 +62,7 @@ UnicodeString __fastcall GetLangStr(UnicodeString ID)
 }
 //---------------------------------------------------------------------------
 
-UnicodeString __fastcall GetID(TStringList* LangFile, int Idx)
+UnicodeString GetID(TStringList* LangFile, int Idx)
 {
 	if(Idx > LangFile->Count) return "???";
 	UnicodeString result = LangFile->Strings[Idx - 1].Delete(1, LangFile->Strings[Idx - 1].Pos("="));
@@ -71,7 +71,7 @@ UnicodeString __fastcall GetID(TStringList* LangFile, int Idx)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall LangForm(TForm* Form)
+void LangForm(TForm* Form)
 {
 	UnicodeString FileName = LangPath + Form->ClassName() + ".lng";
 	if(!FileExists(FileName)) return;
@@ -300,7 +300,7 @@ void __fastcall LangForm(TForm* Form)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall LangFrame(TFrame* Form)
+void LangFrame(TFrame* Form)
 {
 	UnicodeString FileName = LangPath + Form->ClassName() + ".lng";
 	if(!FileExists(FileName)) return;

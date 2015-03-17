@@ -60,11 +60,11 @@ typedef struct TLangCache
 	UnicodeString StrID;
 	UnicodeString StrEntry;
 } TLangCache;
-UnicodeString __fastcall GetLangStr(UnicodeString ID);
-void __fastcall LangForm(TForm* Form);
-void __fastcall LangFrame(TFrame Form);
-void __fastcall ClearLngCache();
 extern DynamicArray<TLangCache> LangCache;
 extern UnicodeString LangPath;
+void ClearLngCache();
+UnicodeString GetLangStr(UnicodeString ID);
+void LangForm(TForm* Form);
+void LangFrame(TFrame Form);
 //---------------------------------------------------------------------------
 #endif
