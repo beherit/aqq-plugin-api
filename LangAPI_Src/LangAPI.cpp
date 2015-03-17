@@ -41,26 +41,20 @@ UnicodeString __fastcall GetLangStr(UnicodeString ID)
 			return LangCache[Count].StrEntry;
 	}
 	UnicodeString FileName = LangPath + "Const.lng";
-	if(!FileExists(FileName)) return "";
-	UnicodeString result;
-	TStringList* LangFile = new TStringList;
-	try
+	if(!FileExists(FileName)) return "???";
+	UnicodeString result = "???";
+	TStringList *LangFile = new TStringList;
+	LangFile->LoadFromFile(FileName, TEncoding::UTF8);
+	for(int Count=0; Count<LangFile->Count; Count++)
 	{
-		LangFile->LoadFromFile(FileName, TEncoding::UTF8);
-		for(int Count=0; Count<LangFile->Count; Count++)
+		if(LangFile->Strings[Count].Pos(ID + "=")==1)
 		{
-			if(LangFile->Strings[Count].Pos(ID + "=")==1)
-			{
-				result = LangFile->Strings[Count].Delete(1, ID.Length() + 1);
-				result = StringReplace(result, "#", "\x0d\x0a", TReplaceFlags() << rfReplaceAll);
-				break;
-			}
+			result = LangFile->Strings[Count].Delete(1, ID.Length() + 1);
+			result = StringReplace(result, "#", "\x0d\x0a", TReplaceFlags() << rfReplaceAll);
+			break;
 		}
 	}
-	__finally
-	{
-		delete LangFile;
-	}
+	delete LangFile;
 	LangCache.Length = LangCache.Length + 1;
 	LangCache[LangCache.Length - 1].StrID = ID;
 	LangCache[LangCache.Length - 1].StrEntry = result;
