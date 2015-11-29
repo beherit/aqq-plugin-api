@@ -3,6 +3,7 @@ syntax: glob
 
 *.pas
 *.local
+*.stat
 __history\*
 Win32\Release\*
 Win32\Debug\*
