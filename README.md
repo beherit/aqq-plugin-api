@@ -2,7 +2,7 @@
 SDK header files needed to writing plugins for [AQQ IM](http://aqq.eu), translated from Delphi language to more human C ++.
 
 ### Contact with author
-The author of these header files is Krzysztof Grochocki. You can contact with him via email (kontakt@beherit.pl) or via Jabber (im@beherit.pl).
+The author of these header files is Krzysztof Grochocki. You can contact with him via XMPP (im@beherit.pl).
 
 ### License
 Header files are licensed by [GNU General Public License 3](http://www.gnu.org/copyleft/gpl.html).
