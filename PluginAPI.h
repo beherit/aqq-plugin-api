@@ -1,5 +1,5 @@
 ﻿//---------------------------------------------------------------------------
-// Copyright (C) 2008-2015 Krzysztof Grochocki
+// Copyright (c) 2008-2016 Krzysztof Grochocki
 //
 // This file is part of PluginAPI for AQQ IM
 //
@@ -243,7 +243,7 @@
 #define AQQ_CONTACTS_BUDDY_FETCHSELECTED L"AQQ/Contacts/Buddy/FetchSelected"
 #define AQQ_CONTACTS_SETINVISIBLE L"AQQ/Contacts/SetInvisible"
 #define AQQ_CONTACTS_GETINVISIBLE L"AQQ/Contacts/GetInvisible"
-  
+
 //Icons
 #define AQQ_ICONS_LOADPNGICON L"AQQ/Icons/LoadPNGIcon"
 #define AQQ_ICONS_REPLACEPNGICON L"AQQ/Icons/ReplacePNGIcon"
@@ -567,807 +567,748 @@
 
 //STRUCTURES-----------------------------------------------------------------
 enum THintEvent {
-  theAuth,
-  theTitle,
-  theData,
-  theStatus,
-  theActivity
+	theAuth,
+	theTitle,
+	theData,
+	theStatus,
+	theActivity
 };
 
 enum TMiniEvent {
-  tmeDeleted,
-  tmeStatus,
-  tmePseudoStatus,
-  tmePseudoMsg,
-  tmeMsg,
-  tmePseudoMsgCap,
-  tmeMsgCap,
-  tmeInfo,
-  tmeAction,
-  tmeAbuse,
-  tmeVoip
+	tmeDeleted,
+	tmeStatus,
+	tmePseudoStatus,
+	tmePseudoMsg,
+	tmeMsg,
+	tmePseudoMsgCap,
+	tmeMsgCap,
+	tmeInfo,
+	tmeAction,
+	tmeAbuse,
+	tmeVoip
 };
 
 enum TAddonType {
-  tatUnCheck,
-  tatUnknown,
-  tatVisualStyle,
-  tatVisualStylePatch,
-  tatSmileys,
-  tatPlugin
+	tatUnCheck,
+	tatUnknown,
+	tatVisualStyle,
+	tatVisualStylePatch,
+	tatSmileys,
+	tatPlugin
 };
 
 typedef struct TPluginChatPrep
 {
-  int cbSize;
-  int UserIdx;
-  wchar_t* JID;
-  wchar_t* Channel;
-  bool CreateNew;
-  bool Fast;
+	int cbSize;
+	int UserIdx;
+	wchar_t* JID;
+	wchar_t* Channel;
+	bool CreateNew;
+	bool Fast;
 } TPluginChatPrep;
-typedef
- TPluginChatPrep* PPluginChatPrep;
+typedef TPluginChatPrep* PPluginChatPrep;
 
 typedef struct TPluginChatPresence
 {
-  int cbSize;
-  int UserIdx;
-  wchar_t* JID;
-  wchar_t* RealJID;
-  wchar_t* Affiliation;
-  wchar_t* Role;
-  bool Offline;
-  wchar_t* Nick;
-  bool Kicked;
-  bool Banned;
-  wchar_t* Ver;
-  wchar_t* JIDToShow;
+	int cbSize;
+	int UserIdx;
+	wchar_t* JID;
+	wchar_t* RealJID;
+	wchar_t* Affiliation;
+	wchar_t* Role;
+	bool Offline;
+	wchar_t* Nick;
+	bool Kicked;
+	bool Banned;
+	wchar_t* Ver;
+	wchar_t* JIDToShow;
 } TPluginChatPresence;
-typedef
- TPluginChatPresence* PPluginChatPresence;
+typedef TPluginChatPresence* PPluginChatPresence;
 
 typedef struct TPluginChatOpen
 {
-  int cbSize;
-  wchar_t* JID;
-  int UserIdx;
-  wchar_t* Channel;
-  wchar_t* Nick;
-  bool NewWindow;
-  bool IsNewMsg;
-  bool Priority;
-  wchar_t* OriginJID;
-  int ImageIndex;
-  bool AutoAccept;
-  unsigned char ChatMode;
+	int cbSize;
+	wchar_t* JID;
+	int UserIdx;
+	wchar_t* Channel;
+	wchar_t* Nick;
+	bool NewWindow;
+	bool IsNewMsg;
+	bool Priority;
+	wchar_t* OriginJID;
+	int ImageIndex;
+	bool AutoAccept;
+	unsigned char ChatMode;
 } TPluginChatOpen;
-typedef
- TPluginChatOpen* PPluginChatOpen;
+typedef TPluginChatOpen* PPluginChatOpen;
 
 typedef struct TPluginHook
 {
-  wchar_t* HookName;
-  WPARAM wParam;
-  LPARAM lParam;
+	wchar_t* HookName;
+	WPARAM wParam;
+	LPARAM lParam;
 } TPluginHook;
-typedef
- TPluginHook* PPluginHook;
+typedef TPluginHook* PPluginHook;
 
 typedef struct TSaveSetup
 {
-  wchar_t* Section;
-  wchar_t* Ident;
-  wchar_t* Value;
+	wchar_t* Section;
+	wchar_t* Ident;
+	wchar_t* Value;
 } TSaveSetup;
-typedef
- TSaveSetup* PSaveSetup;
+typedef TSaveSetup* PSaveSetup;
 
 typedef struct TPluginSong
 {
-  wchar_t* Title;
-  int Position;
-  int Length;
+	wchar_t* Title;
+	int Position;
+	int Length;
 } TPluginSong;
-typedef
- TPluginSong* PPluginSong;
+typedef TPluginSong* PPluginSong;
 
 typedef struct TPluginAddForm
 {
-  int UserIdx;
-  wchar_t* JID;
-  wchar_t* Nick;
-  wchar_t* Agent;
-  bool Modal;
-  bool Custom;
+	int UserIdx;
+	wchar_t* JID;
+	wchar_t* Nick;
+	wchar_t* Agent;
+	bool Modal;
+	bool Custom;
 } TPluginAddForm;
-typedef
- TPluginAddForm* PPluginAddForm;
+typedef TPluginAddForm* PPluginAddForm;
 
 typedef struct TPluginShowInfo
 {
-  int cbSize;
-  TMiniEvent Event;
-  wchar_t* Text;
-  wchar_t* ImagePath;
-  int TimeOut;
-  wchar_t* ActionID;
-  unsigned  int Tick;
+	int cbSize;
+	TMiniEvent Event;
+	wchar_t* Text;
+	wchar_t* ImagePath;
+	int TimeOut;
+	wchar_t* ActionID;
+	unsigned	int Tick;
 } TPluginShowInfo;
-typedef
- TPluginShowInfo* PPluginShowInfo;
+typedef TPluginShowInfo* PPluginShowInfo;
 
 typedef struct TPluginToolTipItem
 {
-  int cbSize;
-  unsigned  int Tick;
-  int Event;
-  wchar_t* Text;
-  wchar_t* ImagePath;
-  wchar_t* ActionID;
-  int Y1;
-  int Y2;
-  int TimeOut;
-  int Flag;
+	int cbSize;
+	unsigned	int Tick;
+	int Event;
+	wchar_t* Text;
+	wchar_t* ImagePath;
+	wchar_t* ActionID;
+	int Y1;
+	int Y2;
+	int TimeOut;
+	int Flag;
 } TPluginToolTipItem;
-typedef
- TPluginToolTipItem* PPluginToolTipItem;
+typedef TPluginToolTipItem* PPluginToolTipItem;
 
 typedef struct TPluginToolTipID
 {
-  int cbSize;
-  wchar_t* ID;
-  wchar_t* Name;
+	int cbSize;
+	wchar_t* ID;
+	wchar_t* Name;
 } TPluginToolTipID;
-typedef
- TPluginToolTipID* PPluginToolTipID;
- 
+typedef TPluginToolTipID* PPluginToolTipID;
+
 typedef struct TPluginColorChange
 {
-  int cbSize;
-  int Hue;
-  int Saturation;
-  int Brightness;
+	int cbSize;
+	int Hue;
+	int Saturation;
+	int Brightness;
 } TPluginColorChange;
-typedef
- TPluginColorChange* PPluginColorChange;
+typedef TPluginColorChange* PPluginColorChange;
 
 typedef struct TPluginSMSResult
 {
-  int cbSize;
-  wchar_t* ID;
-  int Result;
+	int cbSize;
+	wchar_t* ID;
+	int Result;
 } TPluginSMSResult;
-typedef
- TPluginSMSResult* PPluginSMSResult;
+typedef TPluginSMSResult* PPluginSMSResult;
 
 typedef struct TPluginXMLChunk
 {
-  int cbSize;
-  wchar_t* ID;
-  wchar_t* From;
-  wchar_t* XML;
-  int UserIdx;
+	int cbSize;
+	wchar_t* ID;
+	wchar_t* From;
+	wchar_t* XML;
+	int UserIdx;
 } TPluginXMLChunk;
-typedef
- TPluginXMLChunk* PPluginXMLChunk;
+typedef TPluginXMLChunk* PPluginXMLChunk;
 
 typedef struct TPluginContactSimpleInfo
 {
-  int cbSize;
-  wchar_t* JID;
-  wchar_t* First;
-  wchar_t* Last;
-  wchar_t* Nick;
-  wchar_t* CellPhone;
-  wchar_t* Phone;
-  wchar_t* Mail;
+	int cbSize;
+	wchar_t* JID;
+	wchar_t* First;
+	wchar_t* Last;
+	wchar_t* Nick;
+	wchar_t* CellPhone;
+	wchar_t* Phone;
+	wchar_t* Mail;
 } TPluginContactSimpleInfo;
-typedef
- TPluginContactSimpleInfo* PPluginContactSimpleInfo;
+typedef TPluginContactSimpleInfo* PPluginContactSimpleInfo;
 
 typedef struct TPluginItemDescriber
 {
-  int cbSize;
-  unsigned  int FormHandle;
-  wchar_t* ParentName;
-  wchar_t* Name;
+	int cbSize;
+	unsigned	int FormHandle;
+	wchar_t* ParentName;
+	wchar_t* Name;
 } TPluginItemDescriber;
-typedef
- TPluginItemDescriber* PPluginItemDescriber;
+typedef TPluginItemDescriber* PPluginItemDescriber;
 
 typedef struct TPluginPopUp
 {
-  int cbSize;
-  wchar_t* Name;
-  unsigned  int ParentHandle;
-  unsigned  int Handle;
+	int cbSize;
+	wchar_t* Name;
+	unsigned	int ParentHandle;
+	unsigned	int Handle;
 } TPluginPopUp;
-typedef
- TPluginPopUp* PPluginPopUp;
+typedef TPluginPopUp* PPluginPopUp;
 
 typedef struct TPluginTriple
 {
-  int cbSize;
-  unsigned  int Handle1;
-  unsigned  int Handle2;
-  unsigned  int Handle3;
-  int Param1;
-  int Param2;
+	int cbSize;
+	unsigned	int Handle1;
+	unsigned	int Handle2;
+	unsigned	int Handle3;
+	int Param1;
+	int Param2;
 } TPluginTriple;
-typedef
- TPluginTriple* PPluginTriple;
+typedef TPluginTriple* PPluginTriple;
 
 typedef struct TPluginError
 {
-  int cbSize;
-  wchar_t* ID;
-  wchar_t* Desc;
-  wchar_t* LangID;
-  wchar_t* ErrorCode;
+	int cbSize;
+	wchar_t* ID;
+	wchar_t* Desc;
+	wchar_t* LangID;
+	wchar_t* ErrorCode;
 } TPluginError;
-typedef
- TPluginError* PPluginError;
+typedef TPluginError* PPluginError;
 
 typedef struct TPluginTransfer
 {
-  int cbSize;
-  wchar_t* ID;
-  wchar_t* FileName;
-  wchar_t* Location;
-  int Status;
-  wchar_t* TextInfo;
-  __int64 FileSize;
-  __int64 Position;
-  __int64 LastDataSize;
+	int cbSize;
+	wchar_t* ID;
+	wchar_t* FileName;
+	wchar_t* Location;
+	int Status;
+	wchar_t* TextInfo;
+	__int64 FileSize;
+	__int64 Position;
+	__int64 LastDataSize;
 } TPluginTransfer;
-typedef
- TPluginTransfer* PPluginTransfer;
+typedef TPluginTransfer* PPluginTransfer;
 
 typedef struct TPluginTransferOld
 {
-  int cbSize;
-  wchar_t* ID;
-  wchar_t* FileName;
-  wchar_t* Location;
-  int Status;
-  wchar_t* TextInfo;
-  unsigned  int FileSize;
-  unsigned  int Position;
-  unsigned  int LastDataSize;
+	int cbSize;
+	wchar_t* ID;
+	wchar_t* FileName;
+	wchar_t* Location;
+	int Status;
+	wchar_t* TextInfo;
+	unsigned	int FileSize;
+	unsigned	int Position;
+	unsigned	int LastDataSize;
 } TPluginTransferOld;
-typedef
- TPluginTransferOld* PPluginTransferOld;
+typedef TPluginTransferOld* PPluginTransferOld;
 
 typedef struct TPluginWindowEvent
 {
-  int cbSize;
-  wchar_t* ClassName;
-  unsigned  int Handle;
-  int WindowEvent;
+	int cbSize;
+	wchar_t* ClassName;
+	unsigned	int Handle;
+	int WindowEvent;
 } TPluginWindowEvent;
-typedef
- TPluginWindowEvent* PPluginWindowEvent;
+typedef TPluginWindowEvent* PPluginWindowEvent;
 
 typedef struct TPluginChatState
 {
-  int cbSize;
-  wchar_t* Text;
-  int Length;
-  int SelStart;
-  int SelLength;
-  unsigned  int ParentHandle;
-  unsigned  int Handle;
-  int ChatState;
+	int cbSize;
+	wchar_t* Text;
+	int Length;
+	int SelStart;
+	int SelLength;
+	unsigned	int ParentHandle;
+	unsigned	int Handle;
+	int ChatState;
 } TPluginChatState;
-typedef
- TPluginChatState* PPluginChatState;
+typedef TPluginChatState* PPluginChatState;
 
 typedef struct TPluginWebItem
 {
-  int cbSize;
-  wchar_t* ID;
-  wchar_t* Text;
+	int cbSize;
+	wchar_t* ID;
+	wchar_t* Text;
 } TPluginWebItem;
-typedef
- TPluginWebItem* PPluginWebItem;
+typedef TPluginWebItem* PPluginWebItem;
 
 typedef struct TPluginSmallInfo
 {
-  int cbSize;
-  wchar_t* Text;
+	int cbSize;
+	wchar_t* Text;
 } TPluginSmallInfo;
-typedef
- TPluginSmallInfo* PPluginSmallInfo;
+typedef TPluginSmallInfo* PPluginSmallInfo;
 
 typedef struct TPluginWebBeforeNavEvent
 {
-  int cbSize;
-  unsigned  int Handle;
-  wchar_t* URL;
-  wchar_t* Flags;
-  wchar_t* TargetFrameName;
-  wchar_t* PostData;
-  wchar_t* Headers;
+	int cbSize;
+	unsigned	int Handle;
+	wchar_t* URL;
+	wchar_t* Flags;
+	wchar_t* TargetFrameName;
+	wchar_t* PostData;
+	wchar_t* Headers;
 } TPluginWebBeforeNavEvent;
-typedef
- TPluginWebBeforeNavEvent* PPluginWebBeforeNavEvent;
+typedef TPluginWebBeforeNavEvent* PPluginWebBeforeNavEvent;
 
 typedef struct TPluginWebBrowser
 {
-  int cbSize;
-  unsigned  int Handle;
-  int Top;
-  int Left;
-  int Width;
-  int Height;
-  int Align;
-  bool RegisterAsDropTarget;
-  bool SetVisible;
-  bool SetEnabled;
+	int cbSize;
+	unsigned	int Handle;
+	int Top;
+	int Left;
+	int Width;
+	int Height;
+	int Align;
+	bool RegisterAsDropTarget;
+	bool SetVisible;
+	bool SetEnabled;
 } TPluginWebBrowser;
-typedef
- TPluginWebBrowser* PPluginWebBrowser;
+typedef TPluginWebBrowser* PPluginWebBrowser;
 
 typedef struct TPluginDebugInfo
 {
-  int cbSize;
-  wchar_t* JID;
-  wchar_t* XML;
-  unsigned char Mode;
+	int cbSize;
+	wchar_t* JID;
+	wchar_t* XML;
+	unsigned char Mode;
 } TPluginDebugInfo;
-typedef
- TPluginDebugInfo* PPluginDebugInfo;
+typedef TPluginDebugInfo* PPluginDebugInfo;
 
 typedef struct TPluginMaxStatus
 {
-  int cbSize;
-  int IconIndex;
-  wchar_t* Name;
-  int Max;
+	int cbSize;
+	int IconIndex;
+	wchar_t* Name;
+	int Max;
 } TPluginMaxStatus;
-typedef
- TPluginMaxStatus* PPluginMaxStatus;
+typedef TPluginMaxStatus* PPluginMaxStatus;
 
 typedef struct TPluginProxy
 {
-  int cbSize;
-  bool ProxyEnabled;
-  wchar_t* ProxyServer;
-  int ProxyPort;
-  int ProxyType;
-  bool ProxyAuth;
-  wchar_t* ProxyLogin;
-  wchar_t* ProxyPass;
+	int cbSize;
+	bool ProxyEnabled;
+	wchar_t* ProxyServer;
+	int ProxyPort;
+	int ProxyType;
+	bool ProxyAuth;
+	wchar_t* ProxyLogin;
+	wchar_t* ProxyPass;
 } TPluginProxy;
-typedef
- TPluginProxy* PPluginProxy;
+typedef TPluginProxy* PPluginProxy;
 
 typedef struct TPluginImpExp
 {
-  int cbSize;
-  int ImportType;
-  wchar_t* Name;
-  wchar_t* Service;
-  int IconIndex;
+	int cbSize;
+	int ImportType;
+	wchar_t* Name;
+	wchar_t* Service;
+	int IconIndex;
 } TPluginImpExp;
-typedef
- TPluginImpExp* PPluginImpExp;
+typedef TPluginImpExp* PPluginImpExp;
 
 typedef struct TPluginAutomation
 {
-  int cbsize;
-  int Flags;
-  int NewState;
-  double LastActive;
+	int cbsize;
+	int Flags;
+	int NewState;
+	double LastActive;
 } TPluginAutomation;
-typedef
- TPluginAutomation* PPluginAutomation;
+typedef TPluginAutomation* PPluginAutomation;
 
 typedef struct TPluginStateChange
 {
-  int cbSize;
-  int OldState;
-  int NewState;
-  wchar_t* Status;
-  bool ByHand;
-  int UserIdx;
-  wchar_t* JID;
-  bool Force;
-  wchar_t* Server;
-  bool Authorized;
-  bool FromPlugin;
-  wchar_t* Resource;
+	int cbSize;
+	int OldState;
+	int NewState;
+	wchar_t* Status;
+	bool ByHand;
+	int UserIdx;
+	wchar_t* JID;
+	bool Force;
+	wchar_t* Server;
+	bool Authorized;
+	bool FromPlugin;
+	wchar_t* Resource;
 } TPluginStateChange;
-typedef
- TPluginStateChange* PPluginStateChange;
+typedef TPluginStateChange* PPluginStateChange;
 
 typedef struct TPluginSMS
 {
-  int cbSize;
-  wchar_t* CellPhone;
-  wchar_t* Msg;
-  wchar_t* Sign;
-  int GateID;
+	int cbSize;
+	wchar_t* CellPhone;
+	wchar_t* Msg;
+	wchar_t* Sign;
+	int GateID;
 } TPluginSMS;
-typedef
- TPluginSMS* PPluginSMS;
+typedef TPluginSMS* PPluginSMS;
 
 typedef struct TPluginTwoFlagParams
 {
-  int cbSize;
-  wchar_t* Param1;
-  wchar_t* Param2;
-  int Flag1;
-  int Flag2;
+	int cbSize;
+	wchar_t* Param1;
+	wchar_t* Param2;
+	int Flag1;
+	int Flag2;
 } TPluginTwoFlagParams;
-typedef
- TPluginTwoFlagParams* PPluginTwoFlagParams;
+typedef TPluginTwoFlagParams* PPluginTwoFlagParams;
 
 typedef struct TPluginAddUser
 {
-  int cbSize;
-  wchar_t* UID;
-  wchar_t* Server;
-  wchar_t* Nick;
-  wchar_t* Group;
-  wchar_t* Reason;
-  wchar_t* Service;
+	int cbSize;
+	wchar_t* UID;
+	wchar_t* Server;
+	wchar_t* Nick;
+	wchar_t* Group;
+	wchar_t* Reason;
+	wchar_t* Service;
 } TPluginAddUser;
-typedef
- TPluginAddUser* PPluginAddUser;
+typedef TPluginAddUser* PPluginAddUser;
 
 typedef struct TPluginSMSGate
 {
-  int cbSize;
-  wchar_t* Name;
-  wchar_t* Prompt;
-  bool IsConfig;
-  int MaxLength;
-  int SignMaxLength;
+	int cbSize;
+	wchar_t* Name;
+	wchar_t* Prompt;
+	bool IsConfig;
+	int MaxLength;
+	int SignMaxLength;
 } TPluginSMSGate;
-typedef
- TPluginSMSGate* PPluginSMSGate;
+typedef TPluginSMSGate* PPluginSMSGate;
 
 typedef struct TPluginAgent
 {
-  int cbSize;
-  wchar_t* JID;
-  wchar_t* Name;
-  wchar_t* Prompt;
-  bool Transport;
-  bool Search;
-  bool GroupChat;
-  bool Agents;
-  wchar_t* Service;
-  bool CanRegister;
-  wchar_t* Description;
-  bool RequiredID;
-  int IconIndex;
-  wchar_t* PluginAccountName;
+	int cbSize;
+	wchar_t* JID;
+	wchar_t* Name;
+	wchar_t* Prompt;
+	bool Transport;
+	bool Search;
+	bool GroupChat;
+	bool Agents;
+	wchar_t* Service;
+	bool CanRegister;
+	wchar_t* Description;
+	bool RequiredID;
+	int IconIndex;
+	wchar_t* PluginAccountName;
 } TPluginAgent;
-typedef
- TPluginAgent* PPluginAgent;
+typedef TPluginAgent* PPluginAgent;
 
  typedef struct TPluginAvatar
 {
-  wchar_t* FileName;
-  bool XEPEmpty;
-  bool SilentMode;
-  wchar_t* JID;
+	wchar_t* FileName;
+	bool XEPEmpty;
+	bool SilentMode;
+	wchar_t* JID;
 } TPluginAvatar;
-typedef
- TPluginAvatar* PPluginAvatar;
+typedef TPluginAvatar* PPluginAvatar;
 
 typedef struct TPluginMessage
 {
-  int cbSize;
-  wchar_t* JID;
-  double Date;
-  int ChatState;
-  wchar_t* Body;
-  bool Offline;
-  wchar_t* DefaultNick;
-  bool Store;
-  unsigned char Kind;
-  bool ShowAsOutgoing;
+	int cbSize;
+	wchar_t* JID;
+	double Date;
+	int ChatState;
+	wchar_t* Body;
+	bool Offline;
+	wchar_t* DefaultNick;
+	bool Store;
+	unsigned char Kind;
+	bool ShowAsOutgoing;
 } TPluginMessage;
-typedef
- TPluginMessage* PPluginMessage;
+typedef TPluginMessage* PPluginMessage;
 
 typedef struct TPluginMsgPic
 {
-  int cbSize;
-  wchar_t* FilePath;
-  wchar_t* Description;
-  wchar_t* ID;
+	int cbSize;
+	wchar_t* FilePath;
+	wchar_t* Description;
+	wchar_t* ID;
 } TPluginMsgPic;
-typedef
- TPluginMsgPic* PPluginMsgPic;
+typedef TPluginMsgPic* PPluginMsgPic;
 
 typedef struct TPluginFileTransfer
 {
-  int cbSize;
-  wchar_t* FilePath;
-  wchar_t* Description;
-  wchar_t* ID;
+	int cbSize;
+	wchar_t* FilePath;
+	wchar_t* Description;
+	wchar_t* ID;
 } TPluginFileTransfer;
-typedef
- TPluginFileTransfer* PPluginFileTransfer;
- 
+typedef TPluginFileTransfer* PPluginFileTransfer;
+
 typedef struct TPluginMicroMsg
 {
-  int cbSize;
-  wchar_t* Msg;
-  bool SaveToArchive;
+	int cbSize;
+	wchar_t* Msg;
+	bool SaveToArchive;
 } TPluginMicroMsg;
-typedef
- TPluginMicroMsg* PPluginMicroMsg; 
+typedef TPluginMicroMsg* PPluginMicroMsg;
 
 typedef struct TPluginInfo
 {
-  int cbSize;
-  wchar_t* ShortName;
-  DWORD Version;
-  wchar_t* Description;
-  wchar_t* Author;
-  wchar_t* AuthorMail;
-  wchar_t* Copyright;
-  wchar_t* Homepage;
-  unsigned char Flag;
-  int ReplaceDefaultModule;
+	int cbSize;
+	wchar_t* ShortName;
+	DWORD Version;
+	wchar_t* Description;
+	wchar_t* Author;
+	wchar_t* AuthorMail;
+	wchar_t* Copyright;
+	wchar_t* Homepage;
+	unsigned char Flag;
+	int ReplaceDefaultModule;
 } TPluginInfo;
-typedef
- TPluginInfo* PPluginInfo;
+typedef TPluginInfo* PPluginInfo;
 
 typedef struct TPluginActionEdit
 {
-  int cbSize;
-  wchar_t* pszName;
-  wchar_t* Caption;
-  wchar_t* Hint;
-  bool Enabled;
-  bool Visible;
-  int IconIndex;
-  bool Checked;
+	int cbSize;
+	wchar_t* pszName;
+	wchar_t* Caption;
+	wchar_t* Hint;
+	bool Enabled;
+	bool Visible;
+	int IconIndex;
+	bool Checked;
 } TPluginActionEdit;
-typedef
- TPluginActionEdit* PPluginActionEdit;
+typedef TPluginActionEdit* PPluginActionEdit;
 
 typedef struct TPluginAccountInfo
 {
-  int cbSize;
-  wchar_t* Name;
-  wchar_t* JID;
-  wchar_t* Status;
-  int ShowType;
-  int IconIndex;
+	int cbSize;
+	wchar_t* Name;
+	wchar_t* JID;
+	wchar_t* Status;
+	int ShowType;
+	int IconIndex;
 } TPluginAccountInfo;
-typedef
- TPluginAccountInfo* PPluginAccountInfo;
+typedef TPluginAccountInfo* PPluginAccountInfo;
 
 typedef struct TPluginWindowStatus
 {
-  int cbSize;
-  int Status;
-  wchar_t* TextStatus;
-  bool AllAccounts;
-  bool OnlyNote;
+	int cbSize;
+	int Status;
+	wchar_t* TextStatus;
+	bool AllAccounts;
+	bool OnlyNote;
 } TPluginWindowStatus;
-typedef
- TPluginWindowStatus* PPluginWindowStatus;
+typedef TPluginWindowStatus* PPluginWindowStatus;
 
 typedef struct TPluginAction
 {
-  int cbSize;
-  wchar_t* Action;
-  wchar_t* pszName;
-  wchar_t* pszCaption;
-  DWORD Flags;
-  int Position;
-  int IconIndex;
-  wchar_t* pszService;
-  wchar_t* pszPopupName;
-  int PopupPosition;
-  DWORD hotKey;
-  wchar_t* pszContactOwner;
-  int GroupIndex;
-  bool Grouped;
-  bool AutoCheck;
-  bool Checked;
-  unsigned  int Handle;
-  wchar_t* ShortCut;
-  wchar_t* Hint;
-  wchar_t* PositionAfter;
+	int cbSize;
+	wchar_t* Action;
+	wchar_t* pszName;
+	wchar_t* pszCaption;
+	DWORD Flags;
+	int Position;
+	int IconIndex;
+	wchar_t* pszService;
+	wchar_t* pszPopupName;
+	int PopupPosition;
+	DWORD hotKey;
+	wchar_t* pszContactOwner;
+	int GroupIndex;
+	bool Grouped;
+	bool AutoCheck;
+	bool Checked;
+	unsigned	int Handle;
+	wchar_t* ShortCut;
+	wchar_t* Hint;
+	wchar_t* PositionAfter;
 } TPluginAction;
-typedef
- TPluginAction* PPluginAction;
- 
+typedef TPluginAction* PPluginAction;
+
 typedef struct TPluginHTTPRequest
-{ 
-  int cbSize;
-  unsigned char ProtocolVersion;
-  UnicodeString Method;
-  UnicodeString URL;
-  bool AllowCookies;
-  bool ForceEncodeParams;
-  bool HandleRedirects;
-  wchar_t* HeaderUserAgent;
-  wchar_t* HeaderAccept;
-  wchar_t* HeaderAcceptLanguage;
-  wchar_t* HeaderAcceptEncoding;
-  wchar_t* HeaderAcceptCharset;
-  wchar_t* HeaderContentType;
-  wchar_t* HeaderReferer;
-  bool ResultLocation;
-  wchar_t* CustomHeaders;
-  wchar_t* HTTPPayLoad;  
-  bool BasicAuth;
-  wchar_t* BasicAuthLogin;
-  wchar_t* BasicAuthPass;
+{
+	int cbSize;
+	unsigned char ProtocolVersion;
+	UnicodeString Method;
+	UnicodeString URL;
+	bool AllowCookies;
+	bool ForceEncodeParams;
+	bool HandleRedirects;
+	wchar_t* HeaderUserAgent;
+	wchar_t* HeaderAccept;
+	wchar_t* HeaderAcceptLanguage;
+	wchar_t* HeaderAcceptEncoding;
+	wchar_t* HeaderAcceptCharset;
+	wchar_t* HeaderContentType;
+	wchar_t* HeaderReferer;
+	bool ResultLocation;
+	wchar_t* CustomHeaders;
+	wchar_t* HTTPPayLoad;
+	bool BasicAuth;
+	wchar_t* BasicAuthLogin;
+	wchar_t* BasicAuthPass;
 } TPluginHTTPRequest;
-typedef
- TPluginHTTPRequest* PPluginHTTPRequest;
+typedef TPluginHTTPRequest* PPluginHTTPRequest;
 
 typedef struct TPluginAccountEvents
 {
-  int cbSize;
-  wchar_t* DisplayName;
-  int IconIndex;
-  bool EventNew;
-  bool EventEdit;
-  bool EventDelete;
-  bool EventPassChange;
-  bool EventDefault;
+	int cbSize;
+	wchar_t* DisplayName;
+	int IconIndex;
+	bool EventNew;
+	bool EventEdit;
+	bool EventDelete;
+	bool EventPassChange;
+	bool EventDefault;
 } TPluginAccountEvents;
-typedef
- TPluginAccountEvents* PPluginAccountEvents;
+typedef TPluginAccountEvents* PPluginAccountEvents;
 
 typedef struct TPluginContact
 {
-  int cbSize;
-  wchar_t* JID;
-  wchar_t* Nick;
-  wchar_t* Resource;
-  wchar_t* Groups;
-  int State;
-  wchar_t* Status;
-  bool Temporary;
-  bool FromPlugin;
-  int UserIdx;
-  unsigned char Subscription;
-  bool IsChat;
+	int cbSize;
+	wchar_t* JID;
+	wchar_t* Nick;
+	wchar_t* Resource;
+	wchar_t* Groups;
+	int State;
+	wchar_t* Status;
+	bool Temporary;
+	bool FromPlugin;
+	int UserIdx;
+	unsigned char Subscription;
+	bool IsChat;
 } TPluginContact;
-typedef
- TPluginContact* PPluginContact;
+typedef TPluginContact* PPluginContact;
 
 typedef struct TPluginNewsData
 {
-  wchar_t* Kind;
-  wchar_t* Title;
-  wchar_t* ID;
-  bool Active;
-  int ImageIndex;
+	wchar_t* Kind;
+	wchar_t* Title;
+	wchar_t* ID;
+	bool Active;
+	int ImageIndex;
 } TPluginNewsData;
-typedef
- TPluginNewsData* PPluginNewsData;
+typedef TPluginNewsData* PPluginNewsData;
 
 typedef struct TPluginNewsItem
 {
-  TDateTime Date;
-  wchar_t* News;
-  wchar_t* Title;
-  wchar_t* Source;
-  int ParentIndex;
+	TDateTime Date;
+	wchar_t* News;
+	wchar_t* Title;
+	wchar_t* Source;
+	int ParentIndex;
 } TPluginNewsItem;
-typedef
- TPluginNewsItem* PPluginNewsItem;
- 
+typedef TPluginNewsItem* PPluginNewsItem;
+
 typedef struct TPluginForm
 {
-  int cbSize;
-  int Handle;
-  wchar_t* Name;
-  wchar_t* Caption;
-  int Width;
-  int Height;
+	int cbSize;
+	int Handle;
+	wchar_t* Name;
+	wchar_t* Caption;
+	int Width;
+	int Height;
 } TPluginForm;
-typedef
- TPluginForm* PPluginForm;
+typedef TPluginForm* PPluginForm;
 
 typedef struct TPluginFont
 {
-  bool UseCustomFontSize;
-  int CustomFontSize;
-  bool UseCustomFontFace;
-  wchar_t* CustomFontFace;
-  bool UseCustomFontColor;
-  int CustomFontColor;
-  bool FontBold;
-  bool FontUnderLine;
+	bool UseCustomFontSize;
+	int CustomFontSize;
+	bool UseCustomFontFace;
+	wchar_t* CustomFontFace;
+	bool UseCustomFontColor;
+	int CustomFontColor;
+	bool FontBold;
+	bool FontUnderLine;
 } TPluginFont;
-typedef
- TPluginFont* PPluginFont;
- 
+typedef TPluginFont* PPluginFont;
+
 typedef struct TPluginRect
 {
-  int Left;
-  int Top;
-  int Right;
-  int Bottom;
+	int Left;
+	int Top;
+	int Right;
+	int Bottom;
 } TPluginRect;
-typedef
- TPluginRect* PPluginRect;
- 
+typedef TPluginRect* PPluginRect;
+
 typedef struct TPluginControl
 {
-  int cbSize;
-  int Handle;
-  int FormParentHandle;
-  wchar_t* ClassName;
-  wchar_t* Name;
-  wchar_t* Text;
-  wchar_t* Caption;
-  TPluginFont Font;
-  int ModalResult;
-  bool Checked;
-  bool Enabled;
-  TPluginRect BoundsRect;
-  bool AutoSize;
-  bool PassField;
+	int cbSize;
+	int Handle;
+	int FormParentHandle;
+	wchar_t* ClassName;
+	wchar_t* Name;
+	wchar_t* Text;
+	wchar_t* Caption;
+	TPluginFont Font;
+	int ModalResult;
+	bool Checked;
+	bool Enabled;
+	TPluginRect BoundsRect;
+	bool AutoSize;
+	bool PassField;
 } TPluginControl;
-typedef
- TPluginControl* PPluginControl;
- 
+typedef TPluginControl* PPluginControl;
+
 typedef struct TPluginExecMsg
 {
-  wchar_t* JID;
-  int UserIdx;
-  bool ActionSwitchTo;
-  bool ActionCloseWindow;
-  bool ActionTabIndex;
-  bool ActionTabWasClosed;
-  bool IsPriority;
-  bool IsFromPlugin;
+	wchar_t* JID;
+	int UserIdx;
+	bool ActionSwitchTo;
+	bool ActionCloseWindow;
+	bool ActionTabIndex;
+	bool ActionTabWasClosed;
+	bool IsPriority;
+	bool IsFromPlugin;
 } TPluginExecMsg;
-typedef
- TPluginExecMsg* PPluginExecMsg;
- 
+typedef TPluginExecMsg* PPluginExecMsg;
+
 typedef struct TPluginPrivacyItem
 {
-  unsigned char ItemType;
-  wchar_t* Value;
-  unsigned char Msg;
-  unsigned char PresIn;
-  unsigned char PresOut;
-  unsigned char IQ;
+	unsigned char ItemType;
+	wchar_t* Value;
+	unsigned char Msg;
+	unsigned char PresIn;
+	unsigned char PresOut;
+	unsigned char IQ;
 } TPluginPrivacyItem;
-typedef
- TPluginPrivacyItem* PPluginPrivacyItem;
- 
-typedef INT_PTR (__stdcall *TAQQHook)(WPARAM wParam,  LPARAM lParam);
+typedef TPluginPrivacyItem* PPluginPrivacyItem;
+
+typedef INT_PTR (__stdcall *TAQQHook)(WPARAM wParam, LPARAM lParam);
 typedef TAQQHook* PAQQHook;
 
-typedef INT_PTR (__stdcall *TAQQService)(WPARAM wParam,LPARAM lParam);
+typedef INT_PTR (__stdcall *TAQQService)(WPARAM wParam, LPARAM lParam);
 typedef TAQQService* PAQQService;
 
 typedef struct TPluginLink
 {
-  wchar_t* Path;
-  HANDLE (__stdcall *CreateHookableEvent)(wchar_t* Name);
-  INT_PTR (__stdcall *DestroyHookableEvent)(HANDLE hEvent);
-  INT_PTR (__stdcall *NotifyEventHooks)(HANDLE hEvent,  WPARAM wParam,  LPARAM lParam);
-  HANDLE (__stdcall *HookEvent)(wchar_t* Name, TAQQHook HookProc);
-  HANDLE (__stdcall *HookEventMessage)(wchar_t* Name, HWND Handle,  unsigned  int Msg);
-  int (__stdcall *UnhookEvent)(HANDLE hHook);
-  HANDLE (__stdcall *CreateServiceFunction)(wchar_t* Name, TAQQService ServiceProc);
-  void* CreateTransientServiceFunction;
-  INT_PTR (__stdcall *DestroyServiceFunction)(HANDLE hService);
-  INT_PTR (__stdcall *CallService)(wchar_t* Name,  WPARAM wParam,  LPARAM lParam);
-  INT_PTR (__stdcall *ServiceExists)(wchar_t* Name);
+	wchar_t* Path;
+	HANDLE (__stdcall *CreateHookableEvent)(wchar_t* Name);
+	INT_PTR (__stdcall *DestroyHookableEvent)(HANDLE hEvent);
+	INT_PTR (__stdcall *NotifyEventHooks)(HANDLE hEvent, WPARAM wParam,	LPARAM lParam);
+	HANDLE (__stdcall *HookEvent)(wchar_t* Name, TAQQHook HookProc);
+	HANDLE (__stdcall *HookEventMessage)(wchar_t* Name, HWND Handle, unsigned int Msg);
+	int (__stdcall *UnhookEvent)(HANDLE hHook);
+	HANDLE (__stdcall *CreateServiceFunction)(wchar_t* Name, TAQQService ServiceProc);
+	void* CreateTransientServiceFunction;
+	INT_PTR (__stdcall *DestroyServiceFunction)(HANDLE hService);
+	INT_PTR (__stdcall *CallService)(wchar_t* Name,	WPARAM wParam, LPARAM lParam);
+	INT_PTR (__stdcall *ServiceExists)(wchar_t* Name);
 } TPluginLink;
-typedef
- TPluginLink* PPluginLink;
+typedef TPluginLink* PPluginLink;
 //---------------------------------------------------------------------------
 
 //OTHERS----------------------------------------------------------------------
