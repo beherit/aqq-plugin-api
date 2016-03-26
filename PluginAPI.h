@@ -66,6 +66,7 @@
 #define AQQ_SYSTEM_CHANGE_JABBERRESOURCES L"AQQ/System/Change/Resources"
 #define AQQ_SYSTEM_RUNACTION L"AQQ/System/RunAction"
 #define AQQ_SYSTEM_SENDXML L"AQQ/System/SendXML"
+#define AQQ_SYSTEM_SOCIALSEND L"AQQ/System/SocialSend"
 #define AQQ_SYSTEM_XMLIDDEBUG L"AQQ/System/XMLIDDebug"
 #define AQQ_SYSTEM_XMLDEBUG L"AQQ/System/XMLDebug"
 #define AQQ_SYSTEM_ONLINECHECK L"AQQ/System/OnlineCheck"
