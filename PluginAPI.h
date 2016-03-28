@@ -1,5 +1,5 @@
 ﻿//---------------------------------------------------------------------------
-// Copyright (c) 2008-2016 Krzysztof Grochocki
+// Copyright (c) 2008-2016 Krzysztof Grochocki, Rafał Babiarz
 //
 // This file is part of PluginAPI for AQQ IM
 //
