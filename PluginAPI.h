@@ -16,10 +16,8 @@
 // You should have received a copy of the GNU General Public License
 // along with GNU Radio. If not, see <http://www.gnu.org/licenses/>.
 //---------------------------------------------------------------------------
+#pragma once
 
-//---------------------------------------------------------------------------
-#ifndef PLUGINAPI_H
-#define PLUGINAPI_H
 //HOOKS----------------------------------------------------------------------
 //System
 #define AQQ_SYSTEM_BEFOREUNLOAD L"AQQ/System/BeforeUnload"
@@ -1259,5 +1257,3 @@ typedef struct TPluginLink
 
 #define PLUGIN_MAKE_VERSION(a,b,c,d) ((((a)&0xFF)<<24)|(((b)&0xFF)<<16)|(((c)&0xFF)<<8)|((d)&0xFF))
 #define PLUGIN_COMPARE_VERSION(a,b) (((DWORD)(a)<(DWORD)(b))?-1:((DWORD)(a)>(DWORD)(b))?1:0)
-//---------------------------------------------------------------------------
-#endif
