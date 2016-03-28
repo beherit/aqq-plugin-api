@@ -9,7 +9,7 @@ Header files are licensed by [GNU General Public License 3](http://www.gnu.org/c
 
 ~~~~
 PluginAPI for AQQ IM
-Copyright (c) 2008-2016  Krzysztof Grochocki
+Copyright (c) 2008-2016  Krzysztof Grochocki, Rafał Babiarz
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
