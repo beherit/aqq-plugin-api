@@ -18,8 +18,7 @@
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-#ifndef LANGAPI_H
-#define LANGAPI_H
+#pragma once
 #pragma hdrstop
 #pragma comment(lib, "LangAPI")
 //---------------------------------------------------------------------------
@@ -35,4 +34,3 @@ UnicodeString GetLangStr(UnicodeString ID);
 void LangForm(TForm* Form);
 void LangFrame(TFrame Form);
 //---------------------------------------------------------------------------
-#endif
